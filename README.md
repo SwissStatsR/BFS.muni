@@ -5,11 +5,8 @@
 
 <!-- badges: start -->
 
-[![CRAN
-status](https://www.r-pkg.org/badges/version/swissMunicipalities)](https://CRAN.R-project.org/package=swissMunicipalities)
-[![R-CMD-check](https://github.com/swissStatsR/swissMunicipalities/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/swissStatsR/swissMunicipalities/actions/workflows/R-CMD-check.yaml)
-[![R-CMD-check](https://github.com/swissStatsR/swissMunicipalities/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/swissStatsR/swissMunicipalities/actions/workflows/R-CMD-check.yaml)
 [![lifecycle](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)](https://github.com/swissStatsR/swissMunicipalities/)
+[![R-CMD-check](https://github.com/SwissStatsR/swissMunicipalities/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/SwissStatsR/swissMunicipalities/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 **swissMunicipalities** gives access to official historicized lists of
