@@ -1,0 +1,25 @@
+Package: swissMunicipalities
+Title: Get official historicized lists of Swiss municipalities 
+Version: 0.0.1
+Authors@R: c(
+    person("Felix", "Luginbuhl", , "felix.luginbuehl@sg.ch", role = c("aut", "cre"),
+           comment = c(ORCID = "0009-0008-6625-2899")),
+    person("Fachstelle für Statistik Kanton St.Gallen", role = c("cph", "fnd"))
+  )
+Description: R wrapper of the official Swiss REST API of historicized list of 
+    municipalities of Switzerland.
+License: GPL (>= 3)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Depends: 
+    R (>= 4.0)
+Imports: 
+    magrittr,
+    httr2,
+    readr
+Suggests: 
+    testthat (>= 3.0.0),
+    curl,
+    dplyr
+Config/testthat/edition: 3

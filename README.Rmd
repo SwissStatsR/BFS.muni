@@ -1,0 +1,111 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+# swissMunicipalities
+
+<!-- badges: start -->
+[![CRAN status](https://www.r-pkg.org/badges/version/swissMunicipalities)](https://CRAN.R-project.org/package=swissMunicipalities)
+[![R-CMD-check](https://github.com/swissStatsR/swissMunicipalities/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/swissStatsR/swissMunicipalities/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/swissStatsR/swissMunicipalities/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/swissStatsR/swissMunicipalities/actions/workflows/R-CMD-check.yaml)
+[![lifecycle](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)](https://github.com/swissStatsR/swissMunicipalities/)
+<!-- badges: end -->
+
+**swissMunicipalities** gives access to official historicized lists of municipalities of Switzerland using the official [REST API of the Swiss Federal Statistical Office](https://www.bfs.admin.ch/bfs/de/home/dienstleistungen/forschung/api/api-gemeinde.html).
+
+More information about the API can be found [here](https://www.bfs.admin.ch/bfs/de/home/dienstleistungen/forschung/api/api-gemeinde.html).
+
+## Installation
+
+You can install the development version of swissMunicipalities like so:
+
+``` r
+library(remotes)
+
+remotes::install_github("SwissStatsR/swissMunicipalities")
+```
+
+## Get historicized lists of Swiss municipalities
+
+```{r message=FALSE, warning=FALSE}
+library(swissMunicipalities)
+```
+
+You can get a "snapshot" using `get_snapshots()` that exist for at least part of the specified period (or the specified day when `start_period` = `end_period`).
+
+By default, the FSO number is returned. To get the historicized ID, add `hist_id = TRUE` in the `get_snapshots()` function.
+
+```{r message=FALSE, warning=FALSE}
+snapshot <- get_snapshots(start_period = "2024-01-01", end_period = "2024-08-01")
+
+snapshot
+```
+
+> :information_source: **When using `start_period` and `end_period` arguments, the date should be in format "yyyy-mm-dd" (for example "2024-08-01").**
+
+Using the `Level` column, you can extract the existing list of cantons (Level 1), districts (Level 2) and municipalities (Level 3), and even join them to consolidate the municipality dataset.
+
+```{r message=FALSE, warning=FALSE}
+library(dplyr) # just for data wrangling examples
+
+# municipality in German
+municipalities <- snapshot |> 
+  filter(Level == 3) |>
+  select(Code_municipality_de = CODE_OFS_1_Text_de, Identifier_municipality = Identifier, Name_de_municipality = Name_de, Parent_municipality = Parent)
+
+# district in German
+districts <- snapshot |> 
+  filter(Level == 2) |>
+  select(Code_district_de = CODE_OFS_1_Text_de, Identifier_district = Identifier, Name_de_district = Name_de, Parent_district = Parent)
+
+# canton in German
+cantons <- snapshot |> 
+  filter(Level == 1) |>
+  select(Code_canton_de = CODE_OFS_1_Text_de, Identifier_canton = Identifier, Name_de_canton = Name_de)
+
+# consolidate municipality data with districts and cantons levels
+municipalities_consolidated <- municipalities |>
+  inner_join(districts, by = join_by(Parent_municipality == Identifier_district)) |>
+  inner_join(cantons, by = join_by(Parent_district == Identifier_canton)) |>
+  rename(Identifier_district = Parent_municipality, Identifier_canton = Parent_district) |>
+  arrange(Identifier_municipality, Identifier_district)
+
+# get all municipalities of St. Gallen for the given period
+municipalities_consolidated |>
+  filter(Name_de_canton == "St. Gallen")
+```
+
+Access all the mutation list which describes all changes related to municipalities that occurred during the specified period.
+
+To exclude records that only concern territory changes, use `include_territory_exchange = FALSE`.
+
+```{r}
+get_mutations(start_period = "2024-01-01", end_period = "2024-08-01", include_territory_exchange = FALSE)
+```
+
+Get the municipality correspondences, which indicates for each municipality existing at the `start_period` time, which is/are the corresponding municipality(ies) at the `end_period` time.
+
+To exclude districts and municipalities that have not undergone any changes, add `include_unmodified = FALSE`.
+
+```{r}
+get_correspondances(
+  start_period = "2024-01-01", 
+  end_period = "2024-08-01", 
+  include_unmodified = FALSE, 
+  include_territory_exchange = FALSE
+)
+```
+
+The geographical levels offer several classifications of municipalities according to, for example, linguistic regions, agglomerations or even the degree of urbanization.
+
+By default, the FSO number is returned. To get the historicized ID, add `hist_id = TRUE` in the `get_levels()` function. You can change the `label_languages` between French ("fr"), German ("de"), Italian ("it") and English ("en").
+
+```{r message=FALSE, warning=FALSE}
+get_levels(start_period = "2024-01-01", end_period = "2024-08-01", label_languages = "de")
+```
+
+## Acknowledgements
+
+This R package is inspired by **[swissmuni](https://gitlab.com/rpkg.dev/swissmuni/)**. As **swissmuni** is available only for the latest version of R and rely on several R package dependencies which are not on CRAN, this R package provides a simplified R wrapper of the API with minimal dependencies so it can be used on older versions of R (R >= 4.0).
