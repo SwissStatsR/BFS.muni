@@ -31,6 +31,8 @@ remotes::install_github("SwissStatsR/swissMunicipalities")
 library(swissMunicipalities)
 ```
 
+### Snapshot
+
 You can get a "snapshot" using `get_snapshots()` that exist for at least part of the specified period (or the specified day when `start_period` = `end_period`).
 
 By default, the FSO number is returned. To get the historicized ID, add `hist_id = TRUE` in the `get_snapshots()` function.
@@ -75,6 +77,10 @@ municipalities_consolidated |>
   filter(Name_de_canton == "St. Gallen")
 ```
 
+Note that the `CODE_OFS*` variables refers to the official Swiss community identification number (also called "GEOSTAT"/"BFS" number) and the `CODE_HIST*` corresponds to the "historical number".
+
+### Mutations
+
 Access all the mutation list which describes all changes related to municipalities that occurred during the specified period.
 
 To exclude records that only concern territory changes, use `include_territory_exchange = FALSE`.
@@ -83,7 +89,9 @@ To exclude records that only concern territory changes, use `include_territory_e
 get_mutations(start_period = "2024-01-01", end_period = "2024-08-01", include_territory_exchange = FALSE)
 ```
 
-Get the municipality correspondences, which indicates for each municipality existing at the `start_period` time, which is/are the corresponding municipality(ies) at the `end_period` time.
+### Correspondances
+
+Get the municipality correspondances, which indicates for each municipality existing at the `start_period` time, which is/are the corresponding municipality(ies) at the `end_period` time.
 
 To exclude districts and municipalities that have not undergone any changes, add `include_unmodified = FALSE`.
 
@@ -95,6 +103,8 @@ get_correspondances(
   include_territory_exchange = FALSE
 )
 ```
+
+### Levels
 
 The geographical levels offer several classifications of municipalities according to, for example, linguistic regions, agglomerations or even the degree of urbanization.
 

@@ -33,6 +33,8 @@ remotes::install_github("SwissStatsR/swissMunicipalities")
 library(swissMunicipalities)
 ```
 
+### Snapshot
+
 You can get a “snapshot” using `get_snapshots()` that exist for at least
 part of the specified period (or the specified day when `start_period` =
 `end_period`).
@@ -123,6 +125,12 @@ municipalities_consolidated |>
     ## #   ⁵​Code_district_de, ⁶​Name_de_district, ⁷​Identifier_canton, ⁸​Code_canton_de,
     ## #   ⁹​Name_de_canton
 
+Note that the `CODE_OFS*` variables refers to the official Swiss
+community identification number (also called “GEOSTAT”/“BFS” number) and
+the `CODE_HIST*` corresponds to the “historical number”.
+
+### Mutations
+
 Access all the mutation list which describes all changes related to
 municipalities that occurred during the specified period.
 
@@ -149,7 +157,9 @@ get_mutations(start_period = "2024-01-01", end_period = "2024-08-01", include_te
     ## #   ⁵​InitialParentHistoricalCode, ⁶​InitialParentName, ⁷​InitialStep,
     ## #   ⁸​TerminalHistoricalCode
 
-Get the municipality correspondences, which indicates for each
+### Correspondances
+
+Get the municipality correspondances, which indicates for each
 municipality existing at the `start_period` time, which is/are the
 corresponding municipality(ies) at the `end_period` time.
 
@@ -175,6 +185,8 @@ get_correspondances(
     ## #   names ¹​InitialHistoricalCode, ²​InitialCode, ³​InitialName,
     ## #   ⁴​InitialParentHistoricalCode, ⁵​InitialParentName, ⁶​InitialStep,
     ## #   ⁷​TerminalHistoricalCode, ⁸​TerminalCode, ⁹​TerminalName
+
+### Levels
 
 The geographical levels offer several classifications of municipalities
 according to, for example, linguistic regions, agglomerations or even
