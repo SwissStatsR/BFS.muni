@@ -4,6 +4,8 @@ Version: 0.0.1
 Authors@R: c(
     person("Felix", "Luginbuhl", , "felix.luginbuehl@sg.ch", role = c("aut", "cre"),
            comment = c(ORCID = "0009-0008-6625-2899")),
+    person("Salim", "Brüggemann", , "salim-b@pm.me", role = "aut",
+           comment = c(ORCID = "0000-0002-5329-5987")),
     person("Fachstelle für Statistik Kanton St.Gallen", role = c("cph", "fnd"))
   )
 Description: R wrapper of the official Swiss REST API of historicized list of 
