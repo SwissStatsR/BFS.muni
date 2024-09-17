@@ -38,7 +38,7 @@ You can get a "snapshot" using `get_snapshots()` that exist for at least part of
 By default, the FSO number is returned. To get the historicized ID, add `hist_id = TRUE` in the `get_snapshots()` function.
 
 ```{r message=FALSE, warning=FALSE}
-snapshot <- get_snapshots(start_period = "2024-01-01", end_period = "2024-08-01")
+snapshot <- get_snapshots(start_period = "2024-01-01", end_period = "2024-12-31")
 
 snapshot
 ```
@@ -86,7 +86,7 @@ Access all the mutation list which describes all changes related to municipaliti
 To exclude records that only concern territory changes, use `include_territory_exchange = FALSE`.
 
 ```{r}
-get_mutations(start_period = "2024-01-01", end_period = "2024-08-01", include_territory_exchange = FALSE)
+get_mutations(start_period = "2023-01-01", end_period = "2023-12-31", include_territory_exchange = FALSE)
 ```
 
 ### Correspondances
@@ -97,8 +97,8 @@ To exclude districts and municipalities that have not undergone any changes, add
 
 ```{r}
 get_correspondances(
-  start_period = "2024-01-01", 
-  end_period = "2024-08-01", 
+  start_period = "2022-01-01", 
+  end_period = "2022-12-31", 
   include_unmodified = FALSE, 
   include_territory_exchange = FALSE
 )
@@ -111,7 +111,7 @@ The geographical levels offer several classifications of municipalities accordin
 By default, the FSO number is returned. To get the historicized ID, add `hist_id = TRUE` in the `get_levels()` function. You can change the `label_languages` between French ("fr"), German ("de"), Italian ("it") and English ("en").
 
 ```{r message=FALSE, warning=FALSE}
-get_levels(start_period = "2024-01-01", end_period = "2024-08-01", label_languages = "de")
+get_levels(start_period = "2023-01-01", end_period = "2023-12-31", label_languages = "de")
 ```
 
 ## Acknowledgements

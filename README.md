@@ -43,7 +43,7 @@ By default, the FSO number is returned. To get the historicized ID, add
 `hist_id = TRUE` in the `get_snapshots()` function.
 
 ``` r
-snapshot <- get_snapshots(start_period = "2024-01-01", end_period = "2024-08-01")
+snapshot <- get_snapshots(start_period = "2024-01-01", end_period = "2024-12-31")
 
 snapshot
 ```
@@ -138,24 +138,31 @@ To exclude records that only concern territory changes, use
 `include_territory_exchange = FALSE`.
 
 ``` r
-get_mutations(start_period = "2024-01-01", end_period = "2024-08-01", include_territory_exchange = FALSE)
+get_mutations(start_period = "2023-01-01", end_period = "2023-12-31", include_territory_exchange = FALSE)
 ```
 
-    ## # A tibble: 6 × 14
-    ##   MutationNumber Mutat…¹ Initi…² Initi…³ Initi…⁴ Initi…⁵ Initi…⁶ Initi…⁷ Termi…⁸
+    ## # A tibble: 13 × 14
+    ##    MutationNum…¹ Mutat…² Initi…³ Initi…⁴ Initi…⁵ Initi…⁶ Initi…⁷ Initi…⁸ Termi…⁹
     ##            <dbl> <chr>     <dbl>   <dbl> <chr>     <dbl> <chr>     <dbl>   <dbl>
-    ## 1           3983 01.01.…   15344     947 Zwiese…   10289 Verwal…      29   16651
-    ## 2           3984 01.01.…   15376     993 Wangen…   10286 Verwal…      29   16652
-    ## 3           3985 01.01.…   14067    2456 Lüters…   10100 Bezirk…      29   16653
-    ## 4           3986 01.01.…   13320    6773 Beurne…   10226 Distri…      29   16654
-    ## 5           3986 01.01.…   13322    6775 Bonfol    10226 Distri…      29   16654
-    ## 6           3987 01.01.…   10886    4042 Turgi     10025 Bezirk…      29   16655
+    ##  1          3964 01.01.…   11735      21 Adlikon   10082 Bezirk…      29   16621
+    ##  2          3964 01.01.…   12173      32 Humlik…   10082 Bezirk…      29   16621
+    ##  3          3964 01.01.…   13214      30 Andelf…   10082 Bezirk…      26   16621
+    ##  4          3965 01.01.…   15116     536 Diemer…   10288 Verwal…      29   16622
+    ##  5          3966 01.01.…   14441    3372 Hemberg   10264 Wahlkr…      29   16623
+    ##  6          3966 01.01.…   14444    3375 Oberhe…   10264 Wahlkr…      29   16623
+    ##  7          3966 01.01.…   14950    3378 Necker…   10264 Wahlkr…      26   16623
+    ##  8          3967 01.01.…   13302    6744 La Cha…   10225 Distri…      29   16624
+    ##  9          3968 01.01.…   11503    4133 Burg (…   10022 Bezirk…      29   16625
+    ## 10          3969 01.01.…   10849    4179 Ueken     10021 Bezirk…      29   16626
+    ## 11          3969 01.01.…   12317    4166 Herzna…   10021 Bezirk…      29   16626
+    ## 12          3970 01.01.…   13334    6787 Damphr…   10226 Distri…      29   16627
+    ## 13          3970 01.01.…   13340    6793 Lugnez    10226 Distri…      29   16627
     ## # … with 5 more variables: TerminalCode <dbl>, TerminalName <chr>,
     ## #   TerminalParentHistoricalCode <dbl>, TerminalParentName <chr>,
-    ## #   TerminalStep <dbl>, and abbreviated variable names ¹​MutationDate,
-    ## #   ²​InitialHistoricalCode, ³​InitialCode, ⁴​InitialName,
-    ## #   ⁵​InitialParentHistoricalCode, ⁶​InitialParentName, ⁷​InitialStep,
-    ## #   ⁸​TerminalHistoricalCode
+    ## #   TerminalStep <dbl>, and abbreviated variable names ¹​MutationNumber,
+    ## #   ²​MutationDate, ³​InitialHistoricalCode, ⁴​InitialCode, ⁵​InitialName,
+    ## #   ⁶​InitialParentHistoricalCode, ⁷​InitialParentName, ⁸​InitialStep,
+    ## #   ⁹​TerminalHistoricalCode
 
 ### Correspondances
 
@@ -168,18 +175,21 @@ changes, add `include_unmodified = FALSE`.
 
 ``` r
 get_correspondances(
-  start_period = "2024-01-01", 
-  end_period = "2024-08-01", 
+  start_period = "2022-01-01", 
+  end_period = "2022-12-31", 
   include_unmodified = FALSE, 
   include_territory_exchange = FALSE
 )
 ```
 
-    ## # A tibble: 2 × 12
+    ## # A tibble: 5 × 12
     ##   InitialHisto…¹ Initi…² Initi…³ Initi…⁴ Initi…⁵ Initi…⁶ Termi…⁷ Termi…⁸ Termi…⁹
     ##            <dbl>   <dbl> <chr>     <dbl> <chr>     <dbl>   <dbl>   <dbl> <chr>  
-    ## 1          12547      64 Nürens…   10081 Bezirk…      26   16657      64 Nürens…
-    ## 2          12673      62 Kloten    10081 Bezirk…      26   16656      62 Kloten 
+    ## 1          12412    5197 Melano    10003 Distre…      29   16619    5240 Val Ma…
+    ## 2          12762    5195 Marogg…   10003 Distre…      29   16619    5240 Val Ma…
+    ## 3          12848    5219 Rovio     10003 Distre…      29   16619    5240 Val Ma…
+    ## 4          14099    3103 Rüte      10252 Kanton…      29   16620    3112 Schwen…
+    ## 5          14101    3105 Schwen…   10252 Kanton…      29   16620    3112 Schwen…
     ## # … with 3 more variables: TerminalParentHistoricalCode <dbl>,
     ## #   TerminalParentName <chr>, TerminalStep <dbl>, and abbreviated variable
     ## #   names ¹​InitialHistoricalCode, ²​InitialCode, ³​InitialName,
@@ -198,10 +208,10 @@ By default, the FSO number is returned. To get the historicized ID, add
 and English (“en”).
 
 ``` r
-get_levels(start_period = "2024-01-01", end_period = "2024-08-01", label_languages = "de")
+get_levels(start_period = "2023-01-01", end_period = "2023-12-31", label_languages = "de")
 ```
 
-    ## # A tibble: 2,133 × 59
+    ## # A tibble: 2,136 × 59
     ##    Identifier Name_de    CODE_…¹ HR_HG…² HR_HG…³ HR_HG…⁴ HR_HG…⁵ HR_AG…⁶ HR_AG…⁷
     ##         <dbl> <chr>        <dbl>   <dbl> <chr>     <dbl> <chr>     <dbl> <chr>  
     ##  1      10009 Villnache…    4122      19 Aargau    10023 Bezirk…       0 keine …
@@ -214,7 +224,7 @@ get_levels(start_period = "2024-01-01", end_period = "2024-08-01", label_languag
     ##  8      10268 Wil (ZH)        71       1 Zürich    10081 Bezirk…     261 Zürich 
     ##  9      10275 Wettingen     4045      19 Aargau    10025 Bezirk…    4021 Baden …
     ## 10      10277 Wetzikon …     121       1 Zürich    10079 Bezirk…     261 Zürich 
-    ## # … with 2,123 more rows, 50 more variables: HR_AGGL2020 <dbl>,
+    ## # … with 2,126 more rows, 50 more variables: HR_AGGL2020 <dbl>,
     ## #   HR_AGGL2020_Name_de <chr>, HR_AGGLGK2012_L1 <dbl>,
     ## #   HR_AGGLGK2012_L1_Name_de <chr>, HR_AGGLGK2012_L2 <dbl>,
     ## #   HR_AGGLGK2012_L2_Name_de <chr>, HR_AGGLGK2020_L1 <dbl>,
