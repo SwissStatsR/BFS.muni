@@ -11,6 +11,10 @@
 #' territory changes.
 #' @param name_repair \code{\link[readr]{read_csv}} is used internally and
 #' ensures column names are "unique" using the "name_repeir" argument.
+#' @param escape_chars Defines forbidden characters in the response and their
+#' respective escape characters. For example, with the value "/( ).(_)",
+#' all slashes in the response will be replaced with a space while periods are
+#' replaced with underscore.
 #'
 #' @return a data.frame/tibble
 #' @export
@@ -25,6 +29,7 @@ get_correspondances <- function(
     end_period = NULL,
     include_unmodified = NULL,
     include_territory_exchange = NULL,
+    escape_chars = NULL,
     name_repair = "unique"
 ){
   httr2::request(base_url = "https://sms.bfs.admin.ch/") %>%
@@ -32,7 +37,8 @@ get_correspondances <- function(
     httr2::req_url_query(startPeriod = format(as.Date(start_period), "%d-%m-%Y"),
                          endPeriod = format(as.Date(end_period), "%d-%m-%Y"),
                          includeUnmodified = include_unmodified,
-                         includeTerritoryExchange = include_territory_exchange) %>%
+                         includeTerritoryExchange = include_territory_exchange,
+                         escapeChars = escape_chars) %>%
     httr2::req_retry(max_tries = 3, max_seconds = 10) %>%
     httr2::req_perform() %>%
     httr2::resp_body_raw() %>%

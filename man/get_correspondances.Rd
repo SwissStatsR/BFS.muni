@@ -9,6 +9,7 @@ get_correspondances(
   end_period = NULL,
   include_unmodified = NULL,
   include_territory_exchange = NULL,
+  escape_chars = NULL,
   name_repair = "unique"
 )
 }
@@ -21,6 +22,11 @@ get_correspondances(
 
 \item{include_territory_exchange}{Include/exclude records that only concern
 territory changes.}
+
+\item{escape_chars}{Defines forbidden characters in the response and their
+respective escape characters. For example, with the value "/( ).(_)",
+all slashes in the response will be replaced with a space while periods are
+replaced with underscore.}
 
 \item{name_repair}{\code{\link[readr]{read_csv}} is used internally and
 ensures column names are "unique" using the "name_repeir" argument.}
