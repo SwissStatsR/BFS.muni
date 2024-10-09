@@ -37,11 +37,12 @@ library(BFS.muni)
 
 ### Snapshot
 
-Use `get_snapshots()` to get a “snapshot” of all municipalities (`Level`
-= 1), districts (`Level` = 2) and cantons (`Level` = 3) as of today.
+Use `bfs_muni_snapshots()` to get a “snapshot” of all municipalities
+(`Level` = 1), districts (`Level` = 2) and cantons (`Level` = 3) as of
+today.
 
 ``` r
-snapshot <- get_snapshots() # snapshot of today by default
+snapshot <- bfs_muni_snapshots() # snapshot of today by default
 
 snapshot
 ```
@@ -68,14 +69,14 @@ snapshot
     ## #   INSCRIPTION_1_Text <dbl>, REC_TYPE_1_Text_en <lgl>, …
 
 By default, the FSO number is returned. To get the historicized ID, add
-`hist_id = TRUE` in the `get_snapshots()` function.
+`hist_id = TRUE` in the `bfs_muni_snapshots()` function.
 
 If you want to get a snapshot of a given period, use the that exist for
 at least part of the specified period (or of a specified day when
 `start_period` and `end_period` have the exact same date).
 
 ``` r
-get_snapshots(start_period = "2023-01-01", end_period = "2023-12-31")
+bfs_muni_snapshots(start_period = "2023-01-01", end_period = "2023-12-31")
 ```
 
     ## # A tibble: 2,305 × 34
@@ -172,7 +173,7 @@ To exclude records that only concern territory changes, use
 `include_territory_exchange = FALSE`.
 
 ``` r
-get_mutations(
+bfs_muni_mutations(
   start_period = "2023-01-01", 
   end_period = "2023-12-31", 
   include_territory_exchange = FALSE
@@ -212,7 +213,7 @@ To exclude districts and municipalities that have not undergone any
 changes, add `include_unmodified = FALSE`.
 
 ``` r
-get_correspondances(
+bfs_muni_correspondances(
   start_period = "2022-01-01", 
   end_period = "2022-12-31", 
   include_unmodified = FALSE, 
@@ -241,12 +242,12 @@ according to, for example, linguistic regions, agglomerations or even
 the degree of urbanization.
 
 By default, the FSO number is returned. To get the historicized ID, add
-`hist_id = TRUE` in the `get_levels()` function. You can change the
+`hist_id = TRUE` in the `bfs_muni_levels()` function. You can change the
 `label_languages` between French (“fr”), German (“de”), Italian (“it”)
 and English (“en”).
 
 ``` r
-get_levels(label_languages = "de") # as of today by default
+bfs_muni_levels(label_languages = "de") # as of today by default
 ```
 
     ## # A tibble: 2,131 × 57

@@ -23,13 +23,13 @@
 #'
 #' @examples
 #' \donttest{
-#' get_levels(
+#' bfs_muni_levels(
 #'   start_period = "2024-01-01",
 #'   end_period = "2024-08-01"
 #' )
 #' }
 #'
-get_levels <- function(
+bfs_muni_levels <- function(
     start_period = Sys.Date(),
     end_period = Sys.Date(),
     escape_chars = NULL,

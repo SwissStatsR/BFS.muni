@@ -34,20 +34,20 @@ library(BFS.muni)
 
 ### Snapshot
 
-Use `get_snapshots()` to get a "snapshot" of all municipalities (`Level` = 1), districts (`Level` = 2) and cantons (`Level` = 3) as of today.
+Use `bfs_muni_snapshots()` to get a "snapshot" of all municipalities (`Level` = 1), districts (`Level` = 2) and cantons (`Level` = 3) as of today.
 
 ```{r message=FALSE, warning=FALSE}
-snapshot <- get_snapshots() # snapshot of today by default
+snapshot <- bfs_muni_snapshots() # snapshot of today by default
 
 snapshot
 ```
 
-By default, the FSO number is returned. To get the historicized ID, add `hist_id = TRUE` in the `get_snapshots()` function.
+By default, the FSO number is returned. To get the historicized ID, add `hist_id = TRUE` in the `bfs_muni_snapshots()` function.
 
 If you want to get a snapshot of a given period, use the  that exist for at least part of the specified period (or of a specified day when `start_period` and `end_period` have the exact same date).
 
 ```{r}
-get_snapshots(start_period = "2023-01-01", end_period = "2023-12-31")
+bfs_muni_snapshots(start_period = "2023-01-01", end_period = "2023-12-31")
 ```
 
 > :information_source: **When using `start_period` and `end_period` arguments, the date should be in format "yyyy-mm-dd" (for example "2024-08-01").**
@@ -94,7 +94,7 @@ Access all the mutation list which describes all changes related to municipaliti
 To exclude records that only concern territory changes, use `include_territory_exchange = FALSE`.
 
 ```{r}
-get_mutations(
+bfs_muni_mutations(
   start_period = "2023-01-01", 
   end_period = "2023-12-31", 
   include_territory_exchange = FALSE
@@ -108,7 +108,7 @@ Get the municipality correspondances, which indicates for each municipality exis
 To exclude districts and municipalities that have not undergone any changes, add `include_unmodified = FALSE`.
 
 ```{r}
-get_correspondances(
+bfs_muni_correspondances(
   start_period = "2022-01-01", 
   end_period = "2022-12-31", 
   include_unmodified = FALSE, 
@@ -120,10 +120,10 @@ get_correspondances(
 
 The geographical levels offer several classifications of municipalities according to, for example, linguistic regions, agglomerations or even the degree of urbanization.
 
-By default, the FSO number is returned. To get the historicized ID, add `hist_id = TRUE` in the `get_levels()` function. You can change the `label_languages` between French ("fr"), German ("de"), Italian ("it") and English ("en").
+By default, the FSO number is returned. To get the historicized ID, add `hist_id = TRUE` in the `bfs_muni_levels()` function. You can change the `label_languages` between French ("fr"), German ("de"), Italian ("it") and English ("en").
 
 ```{r message=FALSE, warning=FALSE}
-get_levels(label_languages = "de") # as of today by default
+bfs_muni_levels(label_languages = "de") # as of today by default
 ```
 
 ## Acknowledgements
