@@ -44,7 +44,7 @@ snapshot
 
 By default, the FSO number is returned. To get the historicized ID, add `hist_id = TRUE` in the `get_snapshots()` function.
 
-If you want to get a snapshot of a given period, use the  that exist for at least part of the specified period (or of a specified day when `start_period` and `end_period` has the exact same date).
+If you want to get a snapshot of a given period, use the  that exist for at least part of the specified period (or of a specified day when `start_period` and `end_period` have the exact same date).
 
 ```{r}
 get_snapshots(start_period = "2023-01-01", end_period = "2023-12-31")
@@ -119,9 +119,9 @@ The geographical levels offer several classifications of municipalities accordin
 By default, the FSO number is returned. To get the historicized ID, add `hist_id = TRUE` in the `get_levels()` function. You can change the `label_languages` between French ("fr"), German ("de"), Italian ("it") and English ("en").
 
 ```{r message=FALSE, warning=FALSE}
-get_levels(start_period = "2023-01-01", end_period = "2023-12-31", label_languages = "de")
+get_levels(label_languages = "de") # as of today by default
 ```
 
 ## Acknowledgements
 
-This R package is inspired by **[swissmuni](https://gitlab.com/rpkg.dev/swissmuni/)**. As **swissmuni** is available only for the latest version of R and rely on several R package dependencies which are not on CRAN, this R package provides a simplified R wrapper of the API with minimal dependencies so it can be used on older versions of R (R >= 4.0).
+This R package is inspired by **[swissmuni](https://gitlab.com/rpkg.dev/swissmuni/)** created by Salim Brüggemann. As **swissmuni** is available only for the latest version of R and rely on several R package dependencies which are not on CRAN, this R package provides a simplified R wrapper of the API with minimal dependencies so it can be used on older versions of R (R >= 4.0).

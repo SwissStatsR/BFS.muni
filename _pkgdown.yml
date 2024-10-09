@@ -4,3 +4,7 @@ template:
   bootswatch: litera
   bslib:
     primary: "#f72517"
+
+authors:
+  Felix Luginbuhl:
+    href: "https://felixluginbuhl.com"

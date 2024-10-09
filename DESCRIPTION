@@ -26,3 +26,4 @@ Suggests:
     dplyr
 Config/testthat/edition: 3
 URL: http://swissstatsr.org/swissMunicipalities/
+BugReports: https://github.com/swissstatsr/swissMunicipalities/issues

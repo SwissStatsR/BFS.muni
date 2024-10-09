@@ -72,7 +72,7 @@ By default, the FSO number is returned. To get the historicized ID, add
 
 If you want to get a snapshot of a given period, use the that exist for
 at least part of the specified period (or of a specified day when
-`start_period` and `end_period` has the exact same date).
+`start_period` and `end_period` have the exact same date).
 
 ``` r
 get_snapshots(start_period = "2023-01-01", end_period = "2023-12-31")
@@ -242,10 +242,10 @@ By default, the FSO number is returned. To get the historicized ID, add
 and English (“en”).
 
 ``` r
-get_levels(start_period = "2023-01-01", end_period = "2023-12-31", label_languages = "de")
+get_levels(label_languages = "de") # as of today by default
 ```
 
-    ## # A tibble: 2,136 × 59
+    ## # A tibble: 2,131 × 57
     ##    Identifier Name_de    CODE_…¹ HR_HG…² HR_HG…³ HR_HG…⁴ HR_HG…⁵ HR_AG…⁶ HR_AG…⁷
     ##         <dbl> <chr>        <dbl>   <dbl> <chr>     <dbl> <chr>     <dbl> <chr>  
     ##  1      10009 Villnache…    4122      19 Aargau    10023 Bezirk…       0 keine …
@@ -258,7 +258,7 @@ get_levels(start_period = "2023-01-01", end_period = "2023-12-31", label_languag
     ##  8      10268 Wil (ZH)        71       1 Zürich    10081 Bezirk…     261 Zürich 
     ##  9      10275 Wettingen     4045      19 Aargau    10025 Bezirk…    4021 Baden …
     ## 10      10277 Wetzikon …     121       1 Zürich    10079 Bezirk…     261 Zürich 
-    ## # … with 2,126 more rows, 50 more variables: HR_AGGL2020 <dbl>,
+    ## # … with 2,121 more rows, 48 more variables: HR_AGGL2020 <dbl>,
     ## #   HR_AGGL2020_Name_de <chr>, HR_AGGLGK2012_L1 <dbl>,
     ## #   HR_AGGLGK2012_L1_Name_de <chr>, HR_AGGLGK2012_L2 <dbl>,
     ## #   HR_AGGLGK2012_L2_Name_de <chr>, HR_AGGLGK2020_L1 <dbl>,
@@ -269,8 +269,8 @@ get_levels(start_period = "2023-01-01", end_period = "2023-12-31", label_languag
 ## Acknowledgements
 
 This R package is inspired by
-**[swissmuni](https://gitlab.com/rpkg.dev/swissmuni/)**. As
-**swissmuni** is available only for the latest version of R and rely on
-several R package dependencies which are not on CRAN, this R package
-provides a simplified R wrapper of the API with minimal dependencies so
-it can be used on older versions of R (R \>= 4.0).
+**[swissmuni](https://gitlab.com/rpkg.dev/swissmuni/)** created by Salim
+Brüggemann. As **swissmuni** is available only for the latest version of
+R and rely on several R package dependencies which are not on CRAN, this
+R package provides a simplified R wrapper of the API with minimal
+dependencies so it can be used on older versions of R (R \>= 4.0).
