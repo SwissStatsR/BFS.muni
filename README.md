@@ -172,7 +172,11 @@ To exclude records that only concern territory changes, use
 `include_territory_exchange = FALSE`.
 
 ``` r
-get_mutations(start_period = "2023-01-01", end_period = "2023-12-31", include_territory_exchange = FALSE)
+get_mutations(
+  start_period = "2023-01-01", 
+  end_period = "2023-12-31", 
+  include_territory_exchange = FALSE
+)
 ```
 
     ## # A tibble: 13 × 14
