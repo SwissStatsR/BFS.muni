@@ -37,9 +37,8 @@ library(swissMunicipalities)
 
 ### Snapshot
 
-Use `get_snapshots()` to get a “snapshot” of all municipalities
-(`Level` = 1), districts (`Level` = 2) and cantons (`Level` = 3) as of
-today.
+Use `get_snapshots()` to get a “snapshot” of all municipalities (`Level`
+= 1), districts (`Level` = 2) and cantons (`Level` = 3) as of today.
 
 ``` r
 snapshot <- get_snapshots() # snapshot of today by default
