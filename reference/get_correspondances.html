@@ -3,7 +3,7 @@
 start_period time, which is/are the corresponding municipality(ies) at the
 end_period time."><meta property="og:description" content="the correspondences indicate for each municipality existing at the
 start_period time, which is/are the corresponding municipality(ies) at the
-end_period time."></head><body>
+end_period time."><meta property="og:image" content="http://swissstatsr.org/swissMunicipalities/logo.png"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -11,7 +11,7 @@ end_period time."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">swissMunicipalities</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,8 +29,7 @@ end_period time."></head><body>
 </nav><div class="container template-reference-topic">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-
-      <h1>Get municipalities correspondances</h1>
+      <img src="../logo.png" class="logo" alt=""><h1>Get municipalities correspondances</h1>
 
       <div class="d-none name"><code>get_correspondances.Rd</code></div>
     </div>
@@ -44,8 +43,8 @@ end_period time."></head><body>
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_correspondances</span><span class="op">(</span></span>
-<span>  start_period <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  end_period <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  start_period <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  end_period <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  include_unmodified <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  include_territory_exchange <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  escape_chars <span class="op">=</span> <span class="cn">NULL</span>,</span>

@@ -13,6 +13,7 @@
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Get official historicized lists of Swiss municipalities">
 <meta name="description" content="R wrapper of the official Swiss REST API of historicized list of municipalities of Switzerland.">
 <meta property="og:description" content="R wrapper of the official Swiss REST API of historicized list of municipalities of Switzerland.">
+<meta property="og:image" content="http://swissstatsr.org/swissMunicipalities/logo.png">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -22,7 +23,7 @@
 
     <a class="navbar-brand me-2" href="index.html">swissMunicipalities</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,8 +46,10 @@
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
-<div class="page-header"><h1 id="swissmunicipalities">swissMunicipalities<a class="anchor" aria-label="anchor" href="#swissmunicipalities"></a>
-</h1></div>
+<div class="page-header">
+<img src="logo.png" class="logo" alt=""><h1 id="swissmunicipalities-">swissMunicipalities <a class="anchor" aria-label="anchor" href="#swissmunicipalities-"></a>
+</h1>
+</div>
 <!-- badges: start -->
 
 <p><strong>swissMunicipalities</strong> gives access to official historicized lists of municipalities of Switzerland using the official <a href="https://www.bfs.admin.ch/bfs/de/home/dienstleistungen/forschung/api/api-gemeinde.html" class="external-link">REST API of the Swiss Federal Statistical Office</a>.</p>
@@ -68,81 +71,108 @@
 <div class="section level3">
 <h3 id="snapshot">Snapshot<a class="anchor" aria-label="anchor" href="#snapshot"></a>
 </h3>
-<p>You can get a “snapshot” using <code><a href="reference/get_snapshots.html">get_snapshots()</a></code> that exist for at least part of the specified period (or the specified day when <code>start_period</code> = <code>end_period</code>).</p>
-<p>By default, the FSO number is returned. To get the historicized ID, add <code>hist_id = TRUE</code> in the <code><a href="reference/get_snapshots.html">get_snapshots()</a></code> function.</p>
+<p>Use <code><a href="reference/get_snapshots.html">get_snapshots()</a></code> to get a “snapshot” of all municipalities (<code>Level</code> = 1), districts (<code>Level</code> = 2) and cantons (<code>Level</code> = 3) as of today.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">snapshot</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_snapshots.html">get_snapshots</a></span><span class="op">(</span>start_period <span class="op">=</span> <span class="st">"2024-01-01"</span>, end_period <span class="op">=</span> <span class="st">"2024-12-31"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">snapshot</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_snapshots.html">get_snapshots</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># snapshot of today by default</span></span>
 <span></span>
 <span><span class="va">snapshot</span></span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="do">## # A tibble: 2,302 × 34</span></span>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="do">## # A tibble: 2,300 × 29</span></span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="do">##    Identi…¹ Valid…² ValidTo Level Parent Name_en Name_fr Name_de Name_it ABBRE…³</span></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="do">##       &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  </span></span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="do">##  1        1 12.09.… &lt;NA&gt;        1     NA Zürich  Zürich  Zürich  Zürich  ZH     </span></span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="do">##  2    10053 12.09.… &lt;NA&gt;        2      1 Bezirk… Bezirk… Bezirk… Bezirk… Affolt…</span></span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="do">##  3    10575 12.09.… &lt;NA&gt;        3  10053 Stalli… Stalli… Stalli… Stalli… &lt;NA&gt;   </span></span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="do">##  4    11742 12.09.… &lt;NA&gt;        3  10053 Affolt… Affolt… Affolt… Affolt… &lt;NA&gt;   </span></span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="do">##  5    11801 12.09.… &lt;NA&gt;        3  10053 Bonste… Bonste… Bonste… Bonste… &lt;NA&gt;   </span></span>
-<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="do">##  6    11992 01.01.… &lt;NA&gt;        3  10053 Hausen… Hausen… Hausen… Hausen… &lt;NA&gt;   </span></span>
-<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="do">##  7    12249 12.09.… &lt;NA&gt;        3  10053 Heding… Heding… Heding… Heding… &lt;NA&gt;   </span></span>
-<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="do">##  8    12433 12.09.… &lt;NA&gt;        3  10053 Mettme… Mettme… Mettme… Mettme… &lt;NA&gt;   </span></span>
-<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="do">##  9    12497 12.09.… &lt;NA&gt;        3  10053 Obfeld… Obfeld… Obfeld… Obfeld… &lt;NA&gt;   </span></span>
-<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="do">## 10    12671 01.01.… &lt;NA&gt;        3  10053 Kappel… Kappel… Kappel… Kappel… &lt;NA&gt;   </span></span>
-<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="do">## # … with 2,292 more rows, 24 more variables: ABBREV_1_Text_fr &lt;chr&gt;,</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="do">##       &lt;dbl&gt; &lt;chr&gt;   &lt;lgl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  </span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="do">##  1        1 12.09.… NA          1     NA Zürich  Zürich  Zürich  Zürich  ZH     </span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="do">##  2    10053 12.09.… NA          2      1 Bezirk… Bezirk… Bezirk… Bezirk… Affolt…</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="do">##  3    10575 12.09.… NA          3  10053 Stalli… Stalli… Stalli… Stalli… &lt;NA&gt;   </span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="do">##  4    11742 12.09.… NA          3  10053 Affolt… Affolt… Affolt… Affolt… &lt;NA&gt;   </span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="do">##  5    11801 12.09.… NA          3  10053 Bonste… Bonste… Bonste… Bonste… &lt;NA&gt;   </span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="do">##  6    11992 01.01.… NA          3  10053 Hausen… Hausen… Hausen… Hausen… &lt;NA&gt;   </span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="do">##  7    12249 12.09.… NA          3  10053 Heding… Heding… Heding… Heding… &lt;NA&gt;   </span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="do">##  8    12433 12.09.… NA          3  10053 Mettme… Mettme… Mettme… Mettme… &lt;NA&gt;   </span></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="do">##  9    12497 12.09.… NA          3  10053 Obfeld… Obfeld… Obfeld… Obfeld… &lt;NA&gt;   </span></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="do">## 10    12671 01.01.… NA          3  10053 Kappel… Kappel… Kappel… Kappel… &lt;NA&gt;   </span></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="do">## # … with 2,290 more rows, 19 more variables: ABBREV_1_Text_fr &lt;chr&gt;,</span></span>
 <span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="do">## #   ABBREV_1_Text_de &lt;chr&gt;, ABBREV_1_Text_it &lt;chr&gt;, ABBREV_1_Text &lt;chr&gt;,</span></span>
 <span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="do">## #   CODE_OFS_1_Text_en &lt;dbl&gt;, CODE_OFS_1_Text_fr &lt;dbl&gt;,</span></span>
 <span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="do">## #   CODE_OFS_1_Text_de &lt;dbl&gt;, CODE_OFS_1_Text_it &lt;dbl&gt;, CODE_OFS_1_Text &lt;dbl&gt;,</span></span>
 <span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a><span class="do">## #   INSCRIPTION_1_Text_en &lt;dbl&gt;, INSCRIPTION_1_Text_fr &lt;dbl&gt;,</span></span>
 <span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a><span class="do">## #   INSCRIPTION_1_Text_de &lt;dbl&gt;, INSCRIPTION_1_Text_it &lt;dbl&gt;,</span></span>
-<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a><span class="do">## #   INSCRIPTION_1_Text &lt;dbl&gt;, RADIATION_1_Text_en &lt;dbl&gt;, …</span></span></code></pre></div>
+<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a><span class="do">## #   INSCRIPTION_1_Text &lt;dbl&gt;, REC_TYPE_1_Text_en &lt;lgl&gt;, …</span></span></code></pre></div>
+<p>By default, the FSO number is returned. To get the historicized ID, add <code>hist_id = TRUE</code> in the <code><a href="reference/get_snapshots.html">get_snapshots()</a></code> function.</p>
+<p>If you want to get a snapshot of a given period, use the that exist for at least part of the specified period (or of a specified day when <code>start_period</code> and <code>end_period</code> has the exact same date).</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/get_snapshots.html">get_snapshots</a></span><span class="op">(</span>start_period <span class="op">=</span> <span class="st">"2023-01-01"</span>, end_period <span class="op">=</span> <span class="st">"2023-12-31"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="do">## # A tibble: 2,305 × 34</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="do">##    Identi…¹ Valid…² ValidTo Level Parent Name_en Name_fr Name_de Name_it ABBRE…³</span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="do">##       &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  </span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="do">##  1        1 12.09.… &lt;NA&gt;        1     NA Zürich  Zürich  Zürich  Zürich  ZH     </span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="do">##  2    10053 12.09.… &lt;NA&gt;        2      1 Bezirk… Bezirk… Bezirk… Bezirk… Affolt…</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="do">##  3    10575 12.09.… &lt;NA&gt;        3  10053 Stalli… Stalli… Stalli… Stalli… &lt;NA&gt;   </span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="do">##  4    11742 12.09.… &lt;NA&gt;        3  10053 Affolt… Affolt… Affolt… Affolt… &lt;NA&gt;   </span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="do">##  5    11801 12.09.… &lt;NA&gt;        3  10053 Bonste… Bonste… Bonste… Bonste… &lt;NA&gt;   </span></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="do">##  6    11992 01.01.… &lt;NA&gt;        3  10053 Hausen… Hausen… Hausen… Hausen… &lt;NA&gt;   </span></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="do">##  7    12249 12.09.… &lt;NA&gt;        3  10053 Heding… Heding… Heding… Heding… &lt;NA&gt;   </span></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="do">##  8    12433 12.09.… &lt;NA&gt;        3  10053 Mettme… Mettme… Mettme… Mettme… &lt;NA&gt;   </span></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="do">##  9    12497 12.09.… &lt;NA&gt;        3  10053 Obfeld… Obfeld… Obfeld… Obfeld… &lt;NA&gt;   </span></span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="do">## 10    12671 01.01.… &lt;NA&gt;        3  10053 Kappel… Kappel… Kappel… Kappel… &lt;NA&gt;   </span></span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="do">## # … with 2,295 more rows, 24 more variables: ABBREV_1_Text_fr &lt;chr&gt;,</span></span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="do">## #   ABBREV_1_Text_de &lt;chr&gt;, ABBREV_1_Text_it &lt;chr&gt;, ABBREV_1_Text &lt;chr&gt;,</span></span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="do">## #   CODE_OFS_1_Text_en &lt;dbl&gt;, CODE_OFS_1_Text_fr &lt;dbl&gt;,</span></span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a><span class="do">## #   CODE_OFS_1_Text_de &lt;dbl&gt;, CODE_OFS_1_Text_it &lt;dbl&gt;, CODE_OFS_1_Text &lt;dbl&gt;,</span></span>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a><span class="do">## #   INSCRIPTION_1_Text_en &lt;dbl&gt;, INSCRIPTION_1_Text_fr &lt;dbl&gt;,</span></span>
+<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a><span class="do">## #   INSCRIPTION_1_Text_de &lt;dbl&gt;, INSCRIPTION_1_Text_it &lt;dbl&gt;,</span></span>
+<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a><span class="do">## #   INSCRIPTION_1_Text &lt;dbl&gt;, RADIATION_1_Text_en &lt;dbl&gt;, …</span></span></code></pre></div>
 <blockquote>
 <p><span class="emoji" data-emoji="information_source">ℹ️</span> <strong>When using <code>start_period</code> and <code>end_period</code> arguments, the date should be in format “yyyy-mm-dd” (for example “2024-08-01”).</strong></p>
 </blockquote>
-<p>Using the <code>Level</code> column, you can extract the existing list of cantons (Level 1), districts (Level 2) and municipalities (Level 3), and even join them to consolidate the municipality dataset.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<p>Using the <code>Level</code> column, you can extract the existing list of cantons (<code>Level</code> = 1), districts (<code>Level</code> = 2) and municipalities (<code>Level</code> = 3) and join them to consolidate the municipality dataset.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span> <span class="co"># just for data wrangling examples</span></span>
 <span></span>
-<span><span class="co"># municipality in German</span></span>
 <span><span class="va">municipalities</span> <span class="op">&lt;-</span> <span class="va">snapshot</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Level</span> <span class="op">==</span> <span class="fl">3</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span>Code_municipality_de <span class="op">=</span> <span class="va">CODE_OFS_1_Text_de</span>, Identifier_municipality <span class="op">=</span> <span class="va">Identifier</span>, Name_de_municipality <span class="op">=</span> <span class="va">Name_de</span>, Parent_municipality <span class="op">=</span> <span class="va">Parent</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename_with</a></span><span class="op">(</span><span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">.x</span>, <span class="st">"_municipality"</span>, recycle0 <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">Level_municipality</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># district in German</span></span>
 <span><span class="va">districts</span> <span class="op">&lt;-</span> <span class="va">snapshot</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Level</span> <span class="op">==</span> <span class="fl">2</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span>Code_district_de <span class="op">=</span> <span class="va">CODE_OFS_1_Text_de</span>, Identifier_district <span class="op">=</span> <span class="va">Identifier</span>, Name_de_district <span class="op">=</span> <span class="va">Name_de</span>, Parent_district <span class="op">=</span> <span class="va">Parent</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename_with</a></span><span class="op">(</span><span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">.x</span>, <span class="st">"_district"</span>, recycle0 <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">Level_district</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># canton in German</span></span>
 <span><span class="va">cantons</span> <span class="op">&lt;-</span> <span class="va">snapshot</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Level</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span>Code_canton_de <span class="op">=</span> <span class="va">CODE_OFS_1_Text_de</span>, Identifier_canton <span class="op">=</span> <span class="va">Identifier</span>, Name_de_canton <span class="op">=</span> <span class="va">Name_de</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename_with</a></span><span class="op">(</span><span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">.x</span>, <span class="st">"_canton"</span>, recycle0 <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">Level_canton</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># consolidate municipality data with districts and cantons levels</span></span>
 <span><span class="va">municipalities_consolidated</span> <span class="op">&lt;-</span> <span class="va">municipalities</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">inner_join</a></span><span class="op">(</span><span class="va">districts</span>, by <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/join_by.html" class="external-link">join_by</a></span><span class="op">(</span><span class="va">Parent_municipality</span> <span class="op">==</span> <span class="va">Identifier_district</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">inner_join</a></span><span class="op">(</span><span class="va">cantons</span>, by <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/join_by.html" class="external-link">join_by</a></span><span class="op">(</span><span class="va">Parent_district</span> <span class="op">==</span> <span class="va">Identifier_canton</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">districts</span>, by <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/join_by.html" class="external-link">join_by</a></span><span class="op">(</span><span class="va">Parent_municipality</span> <span class="op">==</span> <span class="va">Identifier_district</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">cantons</span>, by <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/join_by.html" class="external-link">join_by</a></span><span class="op">(</span><span class="va">Parent_district</span> <span class="op">==</span> <span class="va">Identifier_canton</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span>Identifier_district <span class="op">=</span> <span class="va">Parent_municipality</span>, Identifier_canton <span class="op">=</span> <span class="va">Parent_district</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Name"</span>, <span class="st">"ABBREV"</span>, <span class="st">"Identifier"</span>, <span class="st">"Valid"</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">Identifier_municipality</span>, <span class="va">Identifier_district</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># get all municipalities of St. Gallen for the given period</span></span>
 <span><span class="va">municipalities_consolidated</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Name_de_canton</span> <span class="op">==</span> <span class="st">"St. Gallen"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="do">## # A tibble: 75 × 9</span></span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="do">##    Code_munici…¹ Ident…² Name_…³ Ident…⁴ Code_…⁵ Name_…⁶ Ident…⁷ Code_…⁸ Name_…⁹</span></span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="do">##            &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;  </span></span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="do">##  1          3201   14378 Häggen…   10266    1721 Wahlkr…      17      NA St. Ga…</span></span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="do">##  2          3202   14379 Muolen    10266    1721 Wahlkr…      17      NA St. Ga…</span></span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="do">##  3          3203   14380 St. Ga…   10266    1721 Wahlkr…      17      NA St. Ga…</span></span>
-<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="do">##  4          3204   14381 Witten…   10266    1721 Wahlkr…      17      NA St. Ga…</span></span>
-<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="do">##  5          3211   14382 Berg (…   10265    1722 Wahlkr…      17      NA St. Ga…</span></span>
-<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="do">##  6          3212   14383 Eggers…   10266    1721 Wahlkr…      17      NA St. Ga…</span></span>
-<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="do">##  7          3213   14384 Goldach   10265    1722 Wahlkr…      17      NA St. Ga…</span></span>
-<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="do">##  8          3214   14385 Mörsch…   10265    1722 Wahlkr…      17      NA St. Ga…</span></span>
-<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="do">##  9          3215   14386 Rorsch…   10265    1722 Wahlkr…      17      NA St. Ga…</span></span>
-<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="do">## 10          3216   14387 Rorsch…   10265    1722 Wahlkr…      17      NA St. Ga…</span></span>
-<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="do">## # … with 65 more rows, and abbreviated variable names ¹​Code_municipality_de,</span></span>
-<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="do">## #   ²​Identifier_municipality, ³​Name_de_municipality, ⁴​Identifier_district,</span></span>
-<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="do">## #   ⁵​Code_district_de, ⁶​Name_de_district, ⁷​Identifier_canton, ⁸​Code_canton_de,</span></span>
-<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a><span class="do">## #   ⁹​Name_de_canton</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="do">## # A tibble: 75 × 82</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="do">##    Name_en_mun…¹ Name_…² Name_…³ Name_…⁴ Name_…⁵ Name_…⁶ Name_…⁷ Name_…⁸ Name_…⁹</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="do">##    &lt;chr&gt;         &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  </span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="do">##  1 Häggenschwil  Häggen… Häggen… Häggen… Wahlkr… Wahlkr… Wahlkr… Wahlkr… St. Ga…</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="do">##  2 Muolen        Muolen  Muolen  Muolen  Wahlkr… Wahlkr… Wahlkr… Wahlkr… St. Ga…</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="do">##  3 St. Gallen    St. Ga… St. Ga… St. Ga… Wahlkr… Wahlkr… Wahlkr… Wahlkr… St. Ga…</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="do">##  4 Wittenbach    Witten… Witten… Witten… Wahlkr… Wahlkr… Wahlkr… Wahlkr… St. Ga…</span></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="do">##  5 Berg (SG)     Berg (… Berg (… Berg (… Wahlkr… Wahlkr… Wahlkr… Wahlkr… St. Ga…</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="do">##  6 Eggersriet    Eggers… Eggers… Eggers… Wahlkr… Wahlkr… Wahlkr… Wahlkr… St. Ga…</span></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="do">##  7 Goldach       Goldach Goldach Goldach Wahlkr… Wahlkr… Wahlkr… Wahlkr… St. Ga…</span></span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="do">##  8 Mörschwil     Mörsch… Mörsch… Mörsch… Wahlkr… Wahlkr… Wahlkr… Wahlkr… St. Ga…</span></span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a><span class="do">##  9 Rorschach     Rorsch… Rorsch… Rorsch… Wahlkr… Wahlkr… Wahlkr… Wahlkr… St. Ga…</span></span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a><span class="do">## 10 Rorschacherb… Rorsch… Rorsch… Rorsch… Wahlkr… Wahlkr… Wahlkr… Wahlkr… St. Ga…</span></span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a><span class="do">## # … with 65 more rows, 73 more variables: Name_fr_canton &lt;chr&gt;,</span></span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a><span class="do">## #   Name_de_canton &lt;chr&gt;, Name_it_canton &lt;chr&gt;,</span></span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a><span class="do">## #   ABBREV_1_Text_en_municipality &lt;chr&gt;, ABBREV_1_Text_fr_municipality &lt;chr&gt;,</span></span>
+<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a><span class="do">## #   ABBREV_1_Text_de_municipality &lt;chr&gt;, ABBREV_1_Text_it_municipality &lt;chr&gt;,</span></span>
+<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a><span class="do">## #   ABBREV_1_Text_municipality &lt;chr&gt;, ABBREV_1_Text_en_district &lt;chr&gt;,</span></span>
+<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a><span class="do">## #   ABBREV_1_Text_fr_district &lt;chr&gt;, ABBREV_1_Text_de_district &lt;chr&gt;,</span></span>
+<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a><span class="do">## #   ABBREV_1_Text_it_district &lt;chr&gt;, ABBREV_1_Text_district &lt;chr&gt;, …</span></span></code></pre></div>
 <p>Note that the <code>CODE_OFS*</code> variables refers to the official Swiss community identification number (also called “GEOSTAT”/“BFS” number) and the <code>CODE_HIST*</code> corresponds to the “historical number”.</p>
 </div>
 <div class="section level3">
@@ -150,84 +180,84 @@
 </h3>
 <p>Access all the mutation list which describes all changes related to municipalities that occurred during the specified period.</p>
 <p>To exclude records that only concern territory changes, use <code>include_territory_exchange = FALSE</code>.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/get_mutations.html">get_mutations</a></span><span class="op">(</span>start_period <span class="op">=</span> <span class="st">"2023-01-01"</span>, end_period <span class="op">=</span> <span class="st">"2023-12-31"</span>, include_territory_exchange <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="do">## # A tibble: 13 × 14</span></span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="do">##    MutationNum…¹ Mutat…² Initi…³ Initi…⁴ Initi…⁵ Initi…⁶ Initi…⁷ Initi…⁸ Termi…⁹</span></span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="do">##            &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;</span></span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="do">##  1          3964 01.01.…   11735      21 Adlikon   10082 Bezirk…      29   16621</span></span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="do">##  2          3964 01.01.…   12173      32 Humlik…   10082 Bezirk…      29   16621</span></span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="do">##  3          3964 01.01.…   13214      30 Andelf…   10082 Bezirk…      26   16621</span></span>
-<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="do">##  4          3965 01.01.…   15116     536 Diemer…   10288 Verwal…      29   16622</span></span>
-<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="do">##  5          3966 01.01.…   14441    3372 Hemberg   10264 Wahlkr…      29   16623</span></span>
-<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="do">##  6          3966 01.01.…   14444    3375 Oberhe…   10264 Wahlkr…      29   16623</span></span>
-<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="do">##  7          3966 01.01.…   14950    3378 Necker…   10264 Wahlkr…      26   16623</span></span>
-<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="do">##  8          3967 01.01.…   13302    6744 La Cha…   10225 Distri…      29   16624</span></span>
-<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a><span class="do">##  9          3968 01.01.…   11503    4133 Burg (…   10022 Bezirk…      29   16625</span></span>
-<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a><span class="do">## 10          3969 01.01.…   10849    4179 Ueken     10021 Bezirk…      29   16626</span></span>
-<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a><span class="do">## 11          3969 01.01.…   12317    4166 Herzna…   10021 Bezirk…      29   16626</span></span>
-<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a><span class="do">## 12          3970 01.01.…   13334    6787 Damphr…   10226 Distri…      29   16627</span></span>
-<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a><span class="do">## 13          3970 01.01.…   13340    6793 Lugnez    10226 Distri…      29   16627</span></span>
-<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a><span class="do">## # … with 5 more variables: TerminalCode &lt;dbl&gt;, TerminalName &lt;chr&gt;,</span></span>
-<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a><span class="do">## #   TerminalParentHistoricalCode &lt;dbl&gt;, TerminalParentName &lt;chr&gt;,</span></span>
-<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a><span class="do">## #   TerminalStep &lt;dbl&gt;, and abbreviated variable names ¹​MutationNumber,</span></span>
-<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a><span class="do">## #   ²​MutationDate, ³​InitialHistoricalCode, ⁴​InitialCode, ⁵​InitialName,</span></span>
-<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a><span class="do">## #   ⁶​InitialParentHistoricalCode, ⁷​InitialParentName, ⁸​InitialStep,</span></span>
-<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a><span class="do">## #   ⁹​TerminalHistoricalCode</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="do">## # A tibble: 13 × 14</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="do">##    MutationNum…¹ Mutat…² Initi…³ Initi…⁴ Initi…⁵ Initi…⁶ Initi…⁷ Initi…⁸ Termi…⁹</span></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="do">##            &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;</span></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="do">##  1          3964 01.01.…   11735      21 Adlikon   10082 Bezirk…      29   16621</span></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="do">##  2          3964 01.01.…   12173      32 Humlik…   10082 Bezirk…      29   16621</span></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="do">##  3          3964 01.01.…   13214      30 Andelf…   10082 Bezirk…      26   16621</span></span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="do">##  4          3965 01.01.…   15116     536 Diemer…   10288 Verwal…      29   16622</span></span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="do">##  5          3966 01.01.…   14441    3372 Hemberg   10264 Wahlkr…      29   16623</span></span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a><span class="do">##  6          3966 01.01.…   14444    3375 Oberhe…   10264 Wahlkr…      29   16623</span></span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a><span class="do">##  7          3966 01.01.…   14950    3378 Necker…   10264 Wahlkr…      26   16623</span></span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a><span class="do">##  8          3967 01.01.…   13302    6744 La Cha…   10225 Distri…      29   16624</span></span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a><span class="do">##  9          3968 01.01.…   11503    4133 Burg (…   10022 Bezirk…      29   16625</span></span>
+<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a><span class="do">## 10          3969 01.01.…   10849    4179 Ueken     10021 Bezirk…      29   16626</span></span>
+<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a><span class="do">## 11          3969 01.01.…   12317    4166 Herzna…   10021 Bezirk…      29   16626</span></span>
+<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a><span class="do">## 12          3970 01.01.…   13334    6787 Damphr…   10226 Distri…      29   16627</span></span>
+<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a><span class="do">## 13          3970 01.01.…   13340    6793 Lugnez    10226 Distri…      29   16627</span></span>
+<span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a><span class="do">## # … with 5 more variables: TerminalCode &lt;dbl&gt;, TerminalName &lt;chr&gt;,</span></span>
+<span id="cb10-18"><a href="#cb10-18" tabindex="-1"></a><span class="do">## #   TerminalParentHistoricalCode &lt;dbl&gt;, TerminalParentName &lt;chr&gt;,</span></span>
+<span id="cb10-19"><a href="#cb10-19" tabindex="-1"></a><span class="do">## #   TerminalStep &lt;dbl&gt;, and abbreviated variable names ¹​MutationNumber,</span></span>
+<span id="cb10-20"><a href="#cb10-20" tabindex="-1"></a><span class="do">## #   ²​MutationDate, ³​InitialHistoricalCode, ⁴​InitialCode, ⁵​InitialName,</span></span>
+<span id="cb10-21"><a href="#cb10-21" tabindex="-1"></a><span class="do">## #   ⁶​InitialParentHistoricalCode, ⁷​InitialParentName, ⁸​InitialStep,</span></span>
+<span id="cb10-22"><a href="#cb10-22" tabindex="-1"></a><span class="do">## #   ⁹​TerminalHistoricalCode</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="correspondances">Correspondances<a class="anchor" aria-label="anchor" href="#correspondances"></a>
 </h3>
 <p>Get the municipality correspondances, which indicates for each municipality existing at the <code>start_period</code> time, which is/are the corresponding municipality(ies) at the <code>end_period</code> time.</p>
 <p>To exclude districts and municipalities that have not undergone any changes, add <code>include_unmodified = FALSE</code>.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/get_correspondances.html">get_correspondances</a></span><span class="op">(</span></span>
 <span>  start_period <span class="op">=</span> <span class="st">"2022-01-01"</span>, </span>
 <span>  end_period <span class="op">=</span> <span class="st">"2022-12-31"</span>, </span>
 <span>  include_unmodified <span class="op">=</span> <span class="cn">FALSE</span>, </span>
 <span>  include_territory_exchange <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="do">## # A tibble: 5 × 12</span></span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="do">##   InitialHisto…¹ Initi…² Initi…³ Initi…⁴ Initi…⁵ Initi…⁶ Termi…⁷ Termi…⁸ Termi…⁹</span></span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="do">##            &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;  </span></span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="do">## 1          12412    5197 Melano    10003 Distre…      29   16619    5240 Val Ma…</span></span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="do">## 2          12762    5195 Marogg…   10003 Distre…      29   16619    5240 Val Ma…</span></span>
-<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="do">## 3          12848    5219 Rovio     10003 Distre…      29   16619    5240 Val Ma…</span></span>
-<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="do">## 4          14099    3103 Rüte      10252 Kanton…      29   16620    3112 Schwen…</span></span>
-<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="do">## 5          14101    3105 Schwen…   10252 Kanton…      29   16620    3112 Schwen…</span></span>
-<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a><span class="do">## # … with 3 more variables: TerminalParentHistoricalCode &lt;dbl&gt;,</span></span>
-<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a><span class="do">## #   TerminalParentName &lt;chr&gt;, TerminalStep &lt;dbl&gt;, and abbreviated variable</span></span>
-<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a><span class="do">## #   names ¹​InitialHistoricalCode, ²​InitialCode, ³​InitialName,</span></span>
-<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a><span class="do">## #   ⁴​InitialParentHistoricalCode, ⁵​InitialParentName, ⁶​InitialStep,</span></span>
-<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a><span class="do">## #   ⁷​TerminalHistoricalCode, ⁸​TerminalCode, ⁹​TerminalName</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="do">## # A tibble: 5 × 12</span></span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="do">##   InitialHisto…¹ Initi…² Initi…³ Initi…⁴ Initi…⁵ Initi…⁶ Termi…⁷ Termi…⁸ Termi…⁹</span></span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a><span class="do">##            &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;  </span></span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="do">## 1          12412    5197 Melano    10003 Distre…      29   16619    5240 Val Ma…</span></span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="do">## 2          12762    5195 Marogg…   10003 Distre…      29   16619    5240 Val Ma…</span></span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a><span class="do">## 3          12848    5219 Rovio     10003 Distre…      29   16619    5240 Val Ma…</span></span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="do">## 4          14099    3103 Rüte      10252 Kanton…      29   16620    3112 Schwen…</span></span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a><span class="do">## 5          14101    3105 Schwen…   10252 Kanton…      29   16620    3112 Schwen…</span></span>
+<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a><span class="do">## # … with 3 more variables: TerminalParentHistoricalCode &lt;dbl&gt;,</span></span>
+<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a><span class="do">## #   TerminalParentName &lt;chr&gt;, TerminalStep &lt;dbl&gt;, and abbreviated variable</span></span>
+<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a><span class="do">## #   names ¹​InitialHistoricalCode, ²​InitialCode, ³​InitialName,</span></span>
+<span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a><span class="do">## #   ⁴​InitialParentHistoricalCode, ⁵​InitialParentName, ⁶​InitialStep,</span></span>
+<span id="cb12-13"><a href="#cb12-13" tabindex="-1"></a><span class="do">## #   ⁷​TerminalHistoricalCode, ⁸​TerminalCode, ⁹​TerminalName</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="levels">Levels<a class="anchor" aria-label="anchor" href="#levels"></a>
 </h3>
 <p>The geographical levels offer several classifications of municipalities according to, for example, linguistic regions, agglomerations or even the degree of urbanization.</p>
 <p>By default, the FSO number is returned. To get the historicized ID, add <code>hist_id = TRUE</code> in the <code><a href="reference/get_levels.html">get_levels()</a></code> function. You can change the <code>label_languages</code> between French (“fr”), German (“de”), Italian (“it”) and English (“en”).</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/get_levels.html">get_levels</a></span><span class="op">(</span>start_period <span class="op">=</span> <span class="st">"2023-01-01"</span>, end_period <span class="op">=</span> <span class="st">"2023-12-31"</span>, label_languages <span class="op">=</span> <span class="st">"de"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="do">## # A tibble: 2,136 × 59</span></span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="do">##    Identifier Name_de    CODE_…¹ HR_HG…² HR_HG…³ HR_HG…⁴ HR_HG…⁵ HR_AG…⁶ HR_AG…⁷</span></span>
-<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a><span class="do">##         &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;  </span></span>
-<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="do">##  1      10009 Villnache…    4122      19 Aargau    10023 Bezirk…       0 keine …</span></span>
-<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="do">##  2      10078 Vionnaz       6158      23 Valais…   10013 Distri…       0 keine …</span></span>
-<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a><span class="do">##  3      10157 Speicher      3023      15 Appenz…   10098 Bezirk…    3203 St. Ga…</span></span>
-<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="do">##  4      10159 Zwischber…    6011      23 Valais…   10035 Bezirk…    6002 Brig –…</span></span>
-<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a><span class="do">##  5      10162 Villars-s…    2228      10 Fribou…   10104 Distri…    2196 Fribou…</span></span>
-<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a><span class="do">##  6      10165 Villarsel…    2230      10 Fribou…   10104 Distri…    2196 Fribou…</span></span>
-<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a><span class="do">##  7      10242 Wila           181       1 Zürich    10076 Bezirk…       0 keine …</span></span>
-<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a><span class="do">##  8      10268 Wil (ZH)        71       1 Zürich    10081 Bezirk…     261 Zürich </span></span>
-<span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a><span class="do">##  9      10275 Wettingen     4045      19 Aargau    10025 Bezirk…    4021 Baden …</span></span>
-<span id="cb12-13"><a href="#cb12-13" tabindex="-1"></a><span class="do">## 10      10277 Wetzikon …     121       1 Zürich    10079 Bezirk…     261 Zürich </span></span>
-<span id="cb12-14"><a href="#cb12-14" tabindex="-1"></a><span class="do">## # … with 2,126 more rows, 50 more variables: HR_AGGL2020 &lt;dbl&gt;,</span></span>
-<span id="cb12-15"><a href="#cb12-15" tabindex="-1"></a><span class="do">## #   HR_AGGL2020_Name_de &lt;chr&gt;, HR_AGGLGK2012_L1 &lt;dbl&gt;,</span></span>
-<span id="cb12-16"><a href="#cb12-16" tabindex="-1"></a><span class="do">## #   HR_AGGLGK2012_L1_Name_de &lt;chr&gt;, HR_AGGLGK2012_L2 &lt;dbl&gt;,</span></span>
-<span id="cb12-17"><a href="#cb12-17" tabindex="-1"></a><span class="do">## #   HR_AGGLGK2012_L2_Name_de &lt;chr&gt;, HR_AGGLGK2020_L1 &lt;dbl&gt;,</span></span>
-<span id="cb12-18"><a href="#cb12-18" tabindex="-1"></a><span class="do">## #   HR_AGGLGK2020_L1_Name_de &lt;chr&gt;, HR_AGGLGK2020_L2 &lt;dbl&gt;,</span></span>
-<span id="cb12-19"><a href="#cb12-19" tabindex="-1"></a><span class="do">## #   HR_AGGLGK2020_L2_Name_de &lt;chr&gt;, HR_BAE2018_L1 &lt;chr&gt;,</span></span>
-<span id="cb12-20"><a href="#cb12-20" tabindex="-1"></a><span class="do">## #   HR_BAE2018_L1_Name_de &lt;chr&gt;, HR_BAE2018_L2 &lt;chr&gt;, …</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="do">## # A tibble: 2,136 × 59</span></span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="do">##    Identifier Name_de    CODE_…¹ HR_HG…² HR_HG…³ HR_HG…⁴ HR_HG…⁵ HR_AG…⁶ HR_AG…⁷</span></span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a><span class="do">##         &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;  </span></span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a><span class="do">##  1      10009 Villnache…    4122      19 Aargau    10023 Bezirk…       0 keine …</span></span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a><span class="do">##  2      10078 Vionnaz       6158      23 Valais…   10013 Distri…       0 keine …</span></span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a><span class="do">##  3      10157 Speicher      3023      15 Appenz…   10098 Bezirk…    3203 St. Ga…</span></span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a><span class="do">##  4      10159 Zwischber…    6011      23 Valais…   10035 Bezirk…    6002 Brig –…</span></span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a><span class="do">##  5      10162 Villars-s…    2228      10 Fribou…   10104 Distri…    2196 Fribou…</span></span>
+<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a><span class="do">##  6      10165 Villarsel…    2230      10 Fribou…   10104 Distri…    2196 Fribou…</span></span>
+<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a><span class="do">##  7      10242 Wila           181       1 Zürich    10076 Bezirk…       0 keine …</span></span>
+<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a><span class="do">##  8      10268 Wil (ZH)        71       1 Zürich    10081 Bezirk…     261 Zürich </span></span>
+<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a><span class="do">##  9      10275 Wettingen     4045      19 Aargau    10025 Bezirk…    4021 Baden …</span></span>
+<span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a><span class="do">## 10      10277 Wetzikon …     121       1 Zürich    10079 Bezirk…     261 Zürich </span></span>
+<span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a><span class="do">## # … with 2,126 more rows, 50 more variables: HR_AGGL2020 &lt;dbl&gt;,</span></span>
+<span id="cb14-15"><a href="#cb14-15" tabindex="-1"></a><span class="do">## #   HR_AGGL2020_Name_de &lt;chr&gt;, HR_AGGLGK2012_L1 &lt;dbl&gt;,</span></span>
+<span id="cb14-16"><a href="#cb14-16" tabindex="-1"></a><span class="do">## #   HR_AGGLGK2012_L1_Name_de &lt;chr&gt;, HR_AGGLGK2012_L2 &lt;dbl&gt;,</span></span>
+<span id="cb14-17"><a href="#cb14-17" tabindex="-1"></a><span class="do">## #   HR_AGGLGK2012_L2_Name_de &lt;chr&gt;, HR_AGGLGK2020_L1 &lt;dbl&gt;,</span></span>
+<span id="cb14-18"><a href="#cb14-18" tabindex="-1"></a><span class="do">## #   HR_AGGLGK2020_L1_Name_de &lt;chr&gt;, HR_AGGLGK2020_L2 &lt;dbl&gt;,</span></span>
+<span id="cb14-19"><a href="#cb14-19" tabindex="-1"></a><span class="do">## #   HR_AGGLGK2020_L2_Name_de &lt;chr&gt;, HR_BAE2018_L1 &lt;chr&gt;,</span></span>
+<span id="cb14-20"><a href="#cb14-20" tabindex="-1"></a><span class="do">## #   HR_BAE2018_L1_Name_de &lt;chr&gt;, HR_BAE2018_L2 &lt;chr&gt;, …</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -266,6 +296,7 @@
 <ul class="list-unstyled">
 <li><a href="https://github.com/swissStatsR/swissMunicipalities/" class="external-link"><img src="https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg" alt="lifecycle"></a></li>
 <li><a href="https://github.com/SwissStatsR/swissMunicipalities/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/SwissStatsR/swissMunicipalities/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://swissstatsr.r-universe.dev/" class="external-link"><img src="https://swissstatsr.r-universe.dev/badges/:name" alt="swissstatsr badge"></a></li>
 </ul>
 </div>
 
