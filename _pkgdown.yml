@@ -1,4 +1,6 @@
 url: http://swissstatsr.org/swissMunicipalities/
 template:
   bootstrap: 5
-
+  bootswatch: litera
+  bslib:
+    primary: "#f72517"
