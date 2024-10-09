@@ -8,7 +8,7 @@
 [![lifecycle](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)](https://github.com/swissStatsR/BFS.muni/)
 [![R-CMD-check](https://github.com/SwissStatsR/BFS.muni/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/SwissStatsR/BFS.muni/actions/workflows/R-CMD-check.yaml)
 [![swissstatsr
-badge](https://swissstatsr.r-universe.dev/badges/:name)](https://swissstatsr.r-universe.dev/)
+badge](https://swissstatsr.r-universe.dev/badges/BFS.muni)](https://swissstatsr.r-universe.dev/)
 <!-- badges: end -->
 
 **BFS.muni** gives access to official historicized lists of
