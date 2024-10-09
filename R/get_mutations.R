@@ -23,8 +23,8 @@
 #' }
 #'
 get_mutations <- function(
-    start_period = NULL,
-    end_period = NULL,
+    start_period = Sys.Date(),
+    end_period = Sys.Date(),
     escape_chars = NULL,
     include_territory_exchange = NULL,
     name_repair = "unique"

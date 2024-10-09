@@ -5,8 +5,8 @@
 \title{Get municipalities snapshots}
 \usage{
 get_snapshots(
-  start_period = NULL,
-  end_period = NULL,
+  start_period = Sys.Date(),
+  end_period = Sys.Date(),
   escape_chars = NULL,
   hist_id = NULL,
   name_repair = "unique"

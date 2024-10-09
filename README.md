@@ -1,12 +1,14 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# swissMunicipalities
+# swissMunicipalities <img src="man/figures/logo.png" align="right" height="138" />
 
 <!-- badges: start -->
 
 [![lifecycle](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)](https://github.com/swissStatsR/swissMunicipalities/)
 [![R-CMD-check](https://github.com/SwissStatsR/swissMunicipalities/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/SwissStatsR/swissMunicipalities/actions/workflows/R-CMD-check.yaml)
+[![swissstatsr
+badge](https://swissstatsr.r-universe.dev/badges/:name)](https://swissstatsr.r-universe.dev/)
 <!-- badges: end -->
 
 **swissMunicipalities** gives access to official historicized lists of
@@ -35,20 +37,48 @@ library(swissMunicipalities)
 
 ### Snapshot
 
-You can get a “snapshot” using `get_snapshots()` that exist for at least
-part of the specified period (or the specified day when `start_period` =
-`end_period`).
-
-By default, the FSO number is returned. To get the historicized ID, add
-`hist_id = TRUE` in the `get_snapshots()` function.
+Use `get_snapshots()` to get a “snapshot” of all municipalities (`Level`
+= 1), districts (`Level` = 2) and cantons (`Level` = 3) as of today.
 
 ``` r
-snapshot <- get_snapshots(start_period = "2024-01-01", end_period = "2024-12-31")
+snapshot <- get_snapshots() # snapshot of today by default
 
 snapshot
 ```
 
-    ## # A tibble: 2,302 × 34
+    ## # A tibble: 2,300 × 29
+    ##    Identi…¹ Valid…² ValidTo Level Parent Name_en Name_fr Name_de Name_it ABBRE…³
+    ##       <dbl> <chr>   <lgl>   <dbl>  <dbl> <chr>   <chr>   <chr>   <chr>   <chr>  
+    ##  1        1 12.09.… NA          1     NA Zürich  Zürich  Zürich  Zürich  ZH     
+    ##  2    10053 12.09.… NA          2      1 Bezirk… Bezirk… Bezirk… Bezirk… Affolt…
+    ##  3    10575 12.09.… NA          3  10053 Stalli… Stalli… Stalli… Stalli… <NA>   
+    ##  4    11742 12.09.… NA          3  10053 Affolt… Affolt… Affolt… Affolt… <NA>   
+    ##  5    11801 12.09.… NA          3  10053 Bonste… Bonste… Bonste… Bonste… <NA>   
+    ##  6    11992 01.01.… NA          3  10053 Hausen… Hausen… Hausen… Hausen… <NA>   
+    ##  7    12249 12.09.… NA          3  10053 Heding… Heding… Heding… Heding… <NA>   
+    ##  8    12433 12.09.… NA          3  10053 Mettme… Mettme… Mettme… Mettme… <NA>   
+    ##  9    12497 12.09.… NA          3  10053 Obfeld… Obfeld… Obfeld… Obfeld… <NA>   
+    ## 10    12671 01.01.… NA          3  10053 Kappel… Kappel… Kappel… Kappel… <NA>   
+    ## # … with 2,290 more rows, 19 more variables: ABBREV_1_Text_fr <chr>,
+    ## #   ABBREV_1_Text_de <chr>, ABBREV_1_Text_it <chr>, ABBREV_1_Text <chr>,
+    ## #   CODE_OFS_1_Text_en <dbl>, CODE_OFS_1_Text_fr <dbl>,
+    ## #   CODE_OFS_1_Text_de <dbl>, CODE_OFS_1_Text_it <dbl>, CODE_OFS_1_Text <dbl>,
+    ## #   INSCRIPTION_1_Text_en <dbl>, INSCRIPTION_1_Text_fr <dbl>,
+    ## #   INSCRIPTION_1_Text_de <dbl>, INSCRIPTION_1_Text_it <dbl>,
+    ## #   INSCRIPTION_1_Text <dbl>, REC_TYPE_1_Text_en <lgl>, …
+
+By default, the FSO number is returned. To get the historicized ID, add
+`hist_id = TRUE` in the `get_snapshots()` function.
+
+If you want to get a snapshot of a given period, use the that exist for
+at least part of the specified period (or of a specified day when
+`start_period` and `end_period` has the exact same date).
+
+``` r
+get_snapshots(start_period = "2023-01-01", end_period = "2023-12-31")
+```
+
+    ## # A tibble: 2,305 × 34
     ##    Identi…¹ Valid…² ValidTo Level Parent Name_en Name_fr Name_de Name_it ABBRE…³
     ##       <dbl> <chr>   <chr>   <dbl>  <dbl> <chr>   <chr>   <chr>   <chr>   <chr>  
     ##  1        1 12.09.… <NA>        1     NA Zürich  Zürich  Zürich  Zürich  ZH     
@@ -61,7 +91,7 @@ snapshot
     ##  8    12433 12.09.… <NA>        3  10053 Mettme… Mettme… Mettme… Mettme… <NA>   
     ##  9    12497 12.09.… <NA>        3  10053 Obfeld… Obfeld… Obfeld… Obfeld… <NA>   
     ## 10    12671 01.01.… <NA>        3  10053 Kappel… Kappel… Kappel… Kappel… <NA>   
-    ## # … with 2,292 more rows, 24 more variables: ABBREV_1_Text_fr <chr>,
+    ## # … with 2,295 more rows, 24 more variables: ABBREV_1_Text_fr <chr>,
     ## #   ABBREV_1_Text_de <chr>, ABBREV_1_Text_it <chr>, ABBREV_1_Text <chr>,
     ## #   CODE_OFS_1_Text_en <dbl>, CODE_OFS_1_Text_fr <dbl>,
     ## #   CODE_OFS_1_Text_de <dbl>, CODE_OFS_1_Text_it <dbl>, CODE_OFS_1_Text <dbl>,
@@ -74,32 +104,33 @@ snapshot
 > “2024-08-01”).**
 
 Using the `Level` column, you can extract the existing list of cantons
-(Level 1), districts (Level 2) and municipalities (Level 3), and even
-join them to consolidate the municipality dataset.
+(`Level` = 1), districts (`Level` = 2) and municipalities (`Level` = 3)
+and join them to consolidate the municipality dataset.
 
 ``` r
 library(dplyr) # just for data wrangling examples
 
-# municipality in German
 municipalities <- snapshot |> 
   filter(Level == 3) |>
-  select(Code_municipality_de = CODE_OFS_1_Text_de, Identifier_municipality = Identifier, Name_de_municipality = Name_de, Parent_municipality = Parent)
+  rename_with(~ paste0(.x, "_municipality", recycle0 = TRUE)) |>
+  select(-Level_municipality)
 
-# district in German
 districts <- snapshot |> 
   filter(Level == 2) |>
-  select(Code_district_de = CODE_OFS_1_Text_de, Identifier_district = Identifier, Name_de_district = Name_de, Parent_district = Parent)
+  rename_with(~ paste0(.x, "_district", recycle0 = TRUE)) |>
+  select(-Level_district)
 
-# canton in German
 cantons <- snapshot |> 
   filter(Level == 1) |>
-  select(Code_canton_de = CODE_OFS_1_Text_de, Identifier_canton = Identifier, Name_de_canton = Name_de)
+  rename_with(~ paste0(.x, "_canton", recycle0 = TRUE)) |>
+  select(-Level_canton)
 
 # consolidate municipality data with districts and cantons levels
 municipalities_consolidated <- municipalities |>
-  inner_join(districts, by = join_by(Parent_municipality == Identifier_district)) |>
-  inner_join(cantons, by = join_by(Parent_district == Identifier_canton)) |>
+  left_join(districts, by = join_by(Parent_municipality == Identifier_district)) |>
+  left_join(cantons, by = join_by(Parent_district == Identifier_canton)) |>
   rename(Identifier_district = Parent_municipality, Identifier_canton = Parent_district) |>
+  select(starts_with(c("Name", "ABBREV", "Identifier", "Valid")), everything()) |>
   arrange(Identifier_municipality, Identifier_district)
 
 # get all municipalities of St. Gallen for the given period
@@ -107,23 +138,26 @@ municipalities_consolidated |>
   filter(Name_de_canton == "St. Gallen")
 ```
 
-    ## # A tibble: 75 × 9
-    ##    Code_munici…¹ Ident…² Name_…³ Ident…⁴ Code_…⁵ Name_…⁶ Ident…⁷ Code_…⁸ Name_…⁹
-    ##            <dbl>   <dbl> <chr>     <dbl>   <dbl> <chr>     <dbl>   <dbl> <chr>  
-    ##  1          3201   14378 Häggen…   10266    1721 Wahlkr…      17      NA St. Ga…
-    ##  2          3202   14379 Muolen    10266    1721 Wahlkr…      17      NA St. Ga…
-    ##  3          3203   14380 St. Ga…   10266    1721 Wahlkr…      17      NA St. Ga…
-    ##  4          3204   14381 Witten…   10266    1721 Wahlkr…      17      NA St. Ga…
-    ##  5          3211   14382 Berg (…   10265    1722 Wahlkr…      17      NA St. Ga…
-    ##  6          3212   14383 Eggers…   10266    1721 Wahlkr…      17      NA St. Ga…
-    ##  7          3213   14384 Goldach   10265    1722 Wahlkr…      17      NA St. Ga…
-    ##  8          3214   14385 Mörsch…   10265    1722 Wahlkr…      17      NA St. Ga…
-    ##  9          3215   14386 Rorsch…   10265    1722 Wahlkr…      17      NA St. Ga…
-    ## 10          3216   14387 Rorsch…   10265    1722 Wahlkr…      17      NA St. Ga…
-    ## # … with 65 more rows, and abbreviated variable names ¹​Code_municipality_de,
-    ## #   ²​Identifier_municipality, ³​Name_de_municipality, ⁴​Identifier_district,
-    ## #   ⁵​Code_district_de, ⁶​Name_de_district, ⁷​Identifier_canton, ⁸​Code_canton_de,
-    ## #   ⁹​Name_de_canton
+    ## # A tibble: 75 × 82
+    ##    Name_en_mun…¹ Name_…² Name_…³ Name_…⁴ Name_…⁵ Name_…⁶ Name_…⁷ Name_…⁸ Name_…⁹
+    ##    <chr>         <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>  
+    ##  1 Häggenschwil  Häggen… Häggen… Häggen… Wahlkr… Wahlkr… Wahlkr… Wahlkr… St. Ga…
+    ##  2 Muolen        Muolen  Muolen  Muolen  Wahlkr… Wahlkr… Wahlkr… Wahlkr… St. Ga…
+    ##  3 St. Gallen    St. Ga… St. Ga… St. Ga… Wahlkr… Wahlkr… Wahlkr… Wahlkr… St. Ga…
+    ##  4 Wittenbach    Witten… Witten… Witten… Wahlkr… Wahlkr… Wahlkr… Wahlkr… St. Ga…
+    ##  5 Berg (SG)     Berg (… Berg (… Berg (… Wahlkr… Wahlkr… Wahlkr… Wahlkr… St. Ga…
+    ##  6 Eggersriet    Eggers… Eggers… Eggers… Wahlkr… Wahlkr… Wahlkr… Wahlkr… St. Ga…
+    ##  7 Goldach       Goldach Goldach Goldach Wahlkr… Wahlkr… Wahlkr… Wahlkr… St. Ga…
+    ##  8 Mörschwil     Mörsch… Mörsch… Mörsch… Wahlkr… Wahlkr… Wahlkr… Wahlkr… St. Ga…
+    ##  9 Rorschach     Rorsch… Rorsch… Rorsch… Wahlkr… Wahlkr… Wahlkr… Wahlkr… St. Ga…
+    ## 10 Rorschacherb… Rorsch… Rorsch… Rorsch… Wahlkr… Wahlkr… Wahlkr… Wahlkr… St. Ga…
+    ## # … with 65 more rows, 73 more variables: Name_fr_canton <chr>,
+    ## #   Name_de_canton <chr>, Name_it_canton <chr>,
+    ## #   ABBREV_1_Text_en_municipality <chr>, ABBREV_1_Text_fr_municipality <chr>,
+    ## #   ABBREV_1_Text_de_municipality <chr>, ABBREV_1_Text_it_municipality <chr>,
+    ## #   ABBREV_1_Text_municipality <chr>, ABBREV_1_Text_en_district <chr>,
+    ## #   ABBREV_1_Text_fr_district <chr>, ABBREV_1_Text_de_district <chr>,
+    ## #   ABBREV_1_Text_it_district <chr>, ABBREV_1_Text_district <chr>, …
 
 Note that the `CODE_OFS*` variables refers to the official Swiss
 community identification number (also called “GEOSTAT”/“BFS” number) and

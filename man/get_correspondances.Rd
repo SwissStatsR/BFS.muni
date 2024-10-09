@@ -5,8 +5,8 @@
 \title{Get municipalities correspondances}
 \usage{
 get_correspondances(
-  start_period = NULL,
-  end_period = NULL,
+  start_period = Sys.Date(),
+  end_period = Sys.Date(),
   include_unmodified = NULL,
   include_territory_exchange = NULL,
   escape_chars = NULL,

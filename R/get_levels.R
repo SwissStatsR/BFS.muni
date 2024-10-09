@@ -30,8 +30,8 @@
 #' }
 #'
 get_levels <- function(
-    start_period = NULL,
-    end_period = NULL,
+    start_period = Sys.Date(),
+    end_period = Sys.Date(),
     escape_chars = NULL,
     hist_id = NULL,
     label_languages = c("", "de", "fr", "it", "en"),

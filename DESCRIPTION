@@ -1,6 +1,6 @@
 Package: swissMunicipalities
 Title: Get official historicized lists of Swiss municipalities 
-Version: 0.0.1
+Version: 0.0.2
 Authors@R: c(
     person("Felix", "Luginbuhl", , "felix.luginbuehl@sg.ch", role = c("aut", "cre"),
            comment = c(ORCID = "0009-0008-6625-2899")),
