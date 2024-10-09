@@ -1,10 +1,10 @@
-url: http://swissstatsr.org/swissMunicipalities/
+url: http://swissstatsr.org/BFS.muni/
 template:
   bootstrap: 5
   bootswatch: litera
   bslib:
-    primary: "#f72517"
-
+    primary: '#f72517'
 authors:
   Felix Luginbuhl:
-    href: "https://felixluginbuhl.com"
+    href: https://felixluginbuhl.com
+

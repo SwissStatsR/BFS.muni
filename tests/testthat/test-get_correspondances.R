@@ -2,7 +2,7 @@ test_that("get_correspondances() returns a none-empty data.frame of 12 columns",
   if (!curl::has_internet()) {
     skip("No internet connection")
   }
-  correspondance <- swissMunicipalities::get_correspondances(start_period = "2024-01-01", end_period = "2024-08-01")
+  correspondance <- BFS.muni::get_correspondances(start_period = "2024-01-01", end_period = "2024-08-01")
   expect_s3_class(correspondance, "data.frame")
   expect_true(nrow(correspondance) > 1)
   expect_true(ncol(correspondance) == 12)

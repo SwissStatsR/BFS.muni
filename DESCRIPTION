@@ -1,4 +1,4 @@
-Package: swissMunicipalities
+Package: BFS.muni
 Title: Get official historicized lists of Swiss municipalities 
 Version: 0.0.2
 Authors@R: c(
@@ -25,5 +25,5 @@ Suggests:
     curl,
     dplyr
 Config/testthat/edition: 3
-URL: http://swissstatsr.org/swissMunicipalities/
-BugReports: https://github.com/swissstatsr/swissMunicipalities/issues
+URL: http://swissstatsr.org/BFS.muni/
+BugReports: https://github.com/swissstatsr/BFS.muni/issues

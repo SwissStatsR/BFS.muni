@@ -1,17 +1,17 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# swissMunicipalities <img src="man/figures/logo.png" align="right" height="138" />
+# BFS.muni <img src="man/figures/logo.png" align="right" height="138" />
 
 <!-- badges: start -->
 
-[![lifecycle](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)](https://github.com/swissStatsR/swissMunicipalities/)
-[![R-CMD-check](https://github.com/SwissStatsR/swissMunicipalities/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/SwissStatsR/swissMunicipalities/actions/workflows/R-CMD-check.yaml)
+[![lifecycle](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)](https://github.com/swissStatsR/BFS.muni/)
+[![R-CMD-check](https://github.com/SwissStatsR/BFS.muni/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/SwissStatsR/BFS.muni/actions/workflows/R-CMD-check.yaml)
 [![swissstatsr
 badge](https://swissstatsr.r-universe.dev/badges/:name)](https://swissstatsr.r-universe.dev/)
 <!-- badges: end -->
 
-**swissMunicipalities** gives access to official historicized lists of
+**BFS.muni** gives access to official historicized lists of
 municipalities of Switzerland using the official [REST API of the Swiss
 Federal Statistical
 Office](https://www.bfs.admin.ch/bfs/de/home/dienstleistungen/forschung/api/api-gemeinde.html).
@@ -21,18 +21,18 @@ More information about the API can be found
 
 ## Installation
 
-You can install the development version of swissMunicipalities like so:
+You can install the development version of BFS.muni like so:
 
 ``` r
 library(remotes)
 
-remotes::install_github("SwissStatsR/swissMunicipalities")
+remotes::install_github("SwissStatsR/BFS.muni")
 ```
 
 ## Get historicized lists of Swiss municipalities
 
 ``` r
-library(swissMunicipalities)
+library(BFS.muni)
 ```
 
 ### Snapshot
