@@ -38,6 +38,7 @@
 <li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json">
 </form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/swissstatsr/swissMunicipalities/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
@@ -97,7 +98,7 @@
 <span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a><span class="do">## #   INSCRIPTION_1_Text_de &lt;dbl&gt;, INSCRIPTION_1_Text_it &lt;dbl&gt;,</span></span>
 <span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a><span class="do">## #   INSCRIPTION_1_Text &lt;dbl&gt;, REC_TYPE_1_Text_en &lt;lgl&gt;, …</span></span></code></pre></div>
 <p>By default, the FSO number is returned. To get the historicized ID, add <code>hist_id = TRUE</code> in the <code><a href="reference/get_snapshots.html">get_snapshots()</a></code> function.</p>
-<p>If you want to get a snapshot of a given period, use the that exist for at least part of the specified period (or of a specified day when <code>start_period</code> and <code>end_period</code> has the exact same date).</p>
+<p>If you want to get a snapshot of a given period, use the that exist for at least part of the specified period (or of a specified day when <code>start_period</code> and <code>end_period</code> have the exact same date).</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/get_snapshots.html">get_snapshots</a></span><span class="op">(</span>start_period <span class="op">=</span> <span class="st">"2023-01-01"</span>, end_period <span class="op">=</span> <span class="st">"2023-12-31"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="do">## # A tibble: 2,305 × 34</span></span>
@@ -237,8 +238,8 @@
 <p>The geographical levels offer several classifications of municipalities according to, for example, linguistic regions, agglomerations or even the degree of urbanization.</p>
 <p>By default, the FSO number is returned. To get the historicized ID, add <code>hist_id = TRUE</code> in the <code><a href="reference/get_levels.html">get_levels()</a></code> function. You can change the <code>label_languages</code> between French (“fr”), German (“de”), Italian (“it”) and English (“en”).</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/get_levels.html">get_levels</a></span><span class="op">(</span>start_period <span class="op">=</span> <span class="st">"2023-01-01"</span>, end_period <span class="op">=</span> <span class="st">"2023-12-31"</span>, label_languages <span class="op">=</span> <span class="st">"de"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb14"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="do">## # A tibble: 2,136 × 59</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/get_levels.html">get_levels</a></span><span class="op">(</span>label_languages <span class="op">=</span> <span class="st">"de"</span><span class="op">)</span> <span class="co"># as of today by default</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="do">## # A tibble: 2,131 × 57</span></span>
 <span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="do">##    Identifier Name_de    CODE_…¹ HR_HG…² HR_HG…³ HR_HG…⁴ HR_HG…⁵ HR_AG…⁶ HR_AG…⁷</span></span>
 <span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a><span class="do">##         &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;  </span></span>
 <span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a><span class="do">##  1      10009 Villnache…    4122      19 Aargau    10023 Bezirk…       0 keine …</span></span>
@@ -251,7 +252,7 @@
 <span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a><span class="do">##  8      10268 Wil (ZH)        71       1 Zürich    10081 Bezirk…     261 Zürich </span></span>
 <span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a><span class="do">##  9      10275 Wettingen     4045      19 Aargau    10025 Bezirk…    4021 Baden …</span></span>
 <span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a><span class="do">## 10      10277 Wetzikon …     121       1 Zürich    10079 Bezirk…     261 Zürich </span></span>
-<span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a><span class="do">## # … with 2,126 more rows, 50 more variables: HR_AGGL2020 &lt;dbl&gt;,</span></span>
+<span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a><span class="do">## # … with 2,121 more rows, 48 more variables: HR_AGGL2020 &lt;dbl&gt;,</span></span>
 <span id="cb14-15"><a href="#cb14-15" tabindex="-1"></a><span class="do">## #   HR_AGGL2020_Name_de &lt;chr&gt;, HR_AGGLGK2012_L1 &lt;dbl&gt;,</span></span>
 <span id="cb14-16"><a href="#cb14-16" tabindex="-1"></a><span class="do">## #   HR_AGGLGK2012_L1_Name_de &lt;chr&gt;, HR_AGGLGK2012_L2 &lt;dbl&gt;,</span></span>
 <span id="cb14-17"><a href="#cb14-17" tabindex="-1"></a><span class="do">## #   HR_AGGLGK2012_L2_Name_de &lt;chr&gt;, HR_AGGLGK2020_L1 &lt;dbl&gt;,</span></span>
@@ -263,10 +264,18 @@
 <div class="section level2">
 <h2 id="acknowledgements">Acknowledgements<a class="anchor" aria-label="anchor" href="#acknowledgements"></a>
 </h2>
-<p>This R package is inspired by <strong><a href="https://gitlab.com/rpkg.dev/swissmuni/" class="external-link">swissmuni</a></strong>. As <strong>swissmuni</strong> is available only for the latest version of R and rely on several R package dependencies which are not on CRAN, this R package provides a simplified R wrapper of the API with minimal dependencies so it can be used on older versions of R (R &gt;= 4.0).</p>
+<p>This R package is inspired by <strong><a href="https://gitlab.com/rpkg.dev/swissmuni/" class="external-link">swissmuni</a></strong> created by Salim Brüggemann. As <strong>swissmuni</strong> is available only for the latest version of R and rely on several R package dependencies which are not on CRAN, this R package provides a simplified R wrapper of the API with minimal dependencies so it can be used on older versions of R (R &gt;= 4.0).</p>
 </div>
 </div>
-  </main><aside class="col-md-3"><div class="license">
+  </main><aside class="col-md-3"><div class="links">
+<h2 data-toc-skip>Links</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/swissstatsr/swissMunicipalities/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/swissstatsr/swissMunicipalities/issues" class="external-link">Report a bug</a></li>
+</ul>
+</div>
+
+<div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
@@ -285,7 +294,8 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Felix Luginbuhl <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0009-0008-6625-2899" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>
+<a href="https://felixluginbuhl.com" class="external-link">Felix Luginbuhl</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0009-0008-6625-2899" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Salim Brüggemann <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-5329-5987" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Fachstelle für Statistik Kanton St.Gallen <br><small class="roles"> Copyright holder, funder </small>  </li>
 </ul>
@@ -305,7 +315,7 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Felix Luginbuhl, Salim Brüggemann, Fachstelle für Statistik Kanton St.Gallen.</p>
+  <p>Developed by <a href="https://felixluginbuhl.com" class="external-link">Felix Luginbuhl</a>, Salim Brüggemann, Fachstelle für Statistik Kanton St.Gallen.</p>
 </div>
 
 <div class="pkgdown-footer-right">
