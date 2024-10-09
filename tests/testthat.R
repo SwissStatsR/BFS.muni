@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/reference/test_package.html#special-files
 
 library(testthat)
-library(BFS.muni)
+library(swissMunicipalities)
 
-test_check("BFS.muni")
+test_check("swissMunicipalities")

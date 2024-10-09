@@ -21,10 +21,10 @@
 #'
 #' @examples
 #' \donttest{
-#' bfs_muni_correspondances(start_period = "2024-01-01", end_period = "2024-08-01")
+#' get_correspondances(start_period = "2024-01-01", end_period = "2024-08-01")
 #' }
 #'
-bfs_muni_correspondances <- function(
+get_correspondances <- function(
     start_period = Sys.Date(),
     end_period = Sys.Date(),
     include_unmodified = NULL,

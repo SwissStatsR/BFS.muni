@@ -19,13 +19,13 @@
 #'
 #' @examples
 #' \donttest{
-#' bfs_muni_snapshots(
+#' get_snapshots(
 #'   start_period = "2024-01-01",
 #'   end_period = "2024-08-01"
 #' )
 #' }
 #'
-bfs_muni_snapshots <- function(
+get_snapshots <- function(
     start_period = Sys.Date(),
     end_period = Sys.Date(),
     escape_chars = NULL,

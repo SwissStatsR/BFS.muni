@@ -1,8 +1,8 @@
-test_that("bfs_muni_mutations() returns a none-empty data.frame of 14 columns", {
+test_that("get_mutations() returns a none-empty data.frame of 14 columns", {
   if (!curl::has_internet()) {
     skip("No internet connection")
   }
-  mutation <- BFS.muni::bfs_muni_mutations(start_period = "2024-01-01", end_period = "2024-08-01")
+  mutation <- swissMunicipalities::get_mutations(start_period = "2024-01-01", end_period = "2024-08-01")
   expect_s3_class(mutation, "data.frame")
   expect_true(nrow(mutation) > 1)
   expect_true(ncol(mutation) == 14)
