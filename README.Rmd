@@ -77,7 +77,7 @@ municipalities_consolidated <- municipalities |>
   left_join(districts, by = join_by(Parent_municipality == Identifier_district)) |>
   left_join(cantons, by = join_by(Parent_district == Identifier_canton)) |>
   rename(Identifier_district = Parent_municipality, Identifier_canton = Parent_district) |>
-  select(starts_with(c("Name", "ABBREV", "Identifier", "Valid")), everything()) |>
+  select(starts_with(c("Identifier", "Name", "ABBREV", "Valid")), everything()) |>
   arrange(Identifier_municipality, Identifier_district)
 
 # get all municipalities of St. Gallen for the given period
